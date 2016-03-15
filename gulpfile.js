@@ -62,7 +62,7 @@ gulp.task('copy:images', () => {
 gulp.task('copy:others', () => {
   console.log('Coping other files...');
 
-	return gulp.src(['app/favicon.ico', 'app/manifest.json', 'app/sw.js', './server.js'])
+	return gulp.src(['app/favicon.ico', 'app/manifest.json'])
 		.pipe(gulp.dest('dist'));
 });
 
@@ -116,7 +116,7 @@ gulp.task('browserify', function () {
 });
 
 gulp.task('clean', (done) => {
-	del(['dist'], done);
+	del(['dist/'], done);
 });
 
 gulp.task('watch', function () {
@@ -126,14 +126,15 @@ gulp.task('watch', function () {
   var JS   = gulp.watch(['app/js/**/*.js'], ['copy:js']);
   var SASS = gulp.watch(['app/css/**/*.scss'], ['copy:sass']);
   var IMG  = gulp.watch(['app/images/*.*'], ['copy:images']);
-  var OTHERS  = gulp.watch(['app/manifest.json', 'app/sw.js', './server.js'], ['copy:others']);
+  var BROWSERIFY  = gulp.watch(['app/sw.js'], ['browserify']);
+  var OTHERS  = gulp.watch(['app/manifest.json', './server.js'], ['copy:others']);
 
   var log = function (event) {
     if (event.type === 'deleted') {
       runSequence('clean');
       setTimeout(function () {
-        runSequence('copy:html', 'copy:sass', 'copy:images', 'watch');
-      }, 500);
+        runSequence('copy:html', 'copy:sass', 'copy:images', 'copy:js', 'copy:others', 'browserify', 'watch');
+      }, 1000);
     }
     console.log(config.notify.update('\n--------- File ' + event.path + ' was ' + event.type + ' ------------------------\n'));
   };
@@ -143,6 +144,7 @@ gulp.task('watch', function () {
   SASS.once('update', log);
   JS.once('update', log);
   IMG.once('update', log);
+  BROWSERIFY.once('update', log);
   OTHERS.once('update', log);
 });
 

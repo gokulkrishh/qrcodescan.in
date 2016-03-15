@@ -11,7 +11,7 @@
         "sizes": "144x144",
         "type": "image/png"
     }, {
-        "src": "images/touch/apple-touch-icon.png",
+        "src": "images/touch/apple-icon-152x152.png",
         "sizes": "152x152",
         "type": "image/png"
     }, {
@@ -25,5 +25,5 @@
   }],
   "start_url": "/",
   "theme_color": "#00bcd4",
-  "background_color": "#EEEEEE"
+  "background_color": "#fff"
 }

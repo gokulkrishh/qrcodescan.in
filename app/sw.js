@@ -14,7 +14,11 @@ var filesToCache = [
 self.oninstall = function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME + '-v' + CACHE_VERSION).then(function(cache) {
-      return cache.addAll(filesToCache);
+      return cache.addAll(filesToCache)
+        .then(function (response) {
+          console.log('Files are cached successfully.');
+          return response;
+        })
     })
   );
 };

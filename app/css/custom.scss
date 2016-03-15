@@ -22,10 +22,9 @@
 }
 
 .custom-btn {
-
-  position: absolute;
-  top: 85%;
+  position: fixed;
   right: 5%;
+  bottom: 55px;
 
   svg {
     position: relative;
@@ -44,4 +43,12 @@
   left: 0;
   bottom: 0;
   right: 0;
+  font-size: 16px;
+}
+
+@media (max-width: 479px) {
+  .mdl-snackbar {
+    width: 100%;
+    left: 50%;
+  }
 }
