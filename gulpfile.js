@@ -19,7 +19,7 @@ var autoprefixer = require('gulp-autoprefixer');
 gulp.task('browserSync', () => {
   browserSync({
     notify: false,
-    port: 8000,
+    port: 5000,
     server: 'dist/',
     open: false
   });
@@ -55,7 +55,7 @@ gulp.task('copy:sass', () => {
 gulp.task('copy:images', () => {
   console.log('Coping image files...');
 
-	return gulp.src(['app/images/*.*'])
+	return gulp.src(['app/images/*.*', 'app/images/**/*.*'])
 		.pipe(gulp.dest('dist/images'));
 });
 
