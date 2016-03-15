@@ -1,0 +1,39 @@
+.custom-menu-icon {
+  font-size: 28px;
+  line-height: 47px;
+}
+
+.mdl-navigation__link {
+  i {
+    font-size: 19px;
+  }
+
+  span {
+    padding-left: 15px;
+    vertical-align: middle;
+    position: relative;
+    top: 1px;
+  }
+}
+
+.custom-title,
+.custom-menu-icon {
+  color: #fff;
+}
+
+.custom-btn {
+
+  position: absolute;
+  top: 85%;
+  right: 5%;
+
+  svg {
+    position: relative;
+    top: -1px;
+  }
+}
+
+.custom-msg {
+  text-align: center;
+  margin: 60% auto;
+}

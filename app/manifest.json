@@ -1,0 +1,29 @@
+
+{
+  "short_name": "Barcode Scanner",
+  "name": "Barcode Scanner",
+  "description": "A barcode scanner progressive web app",
+  "display": "standalone",
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "icons": [{
+        "src": "images/android-icon-144x144.png",
+        "sizes": "144x144",
+        "type": "image/png"
+    }, {
+        "src": "images/apple-touch-icon.png",
+        "sizes": "152x152",
+        "type": "image/png"
+    }, {
+        "src": "images/ms-icon-144x144.png",
+        "sizes": "144x144",
+        "type": "image/png"
+    }, {
+        "src": "images/android-icon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+  }],
+  "start_url": "/",
+  "theme_color": "#00bcd4",
+  "background_color": "#EEEEEE"
+}
