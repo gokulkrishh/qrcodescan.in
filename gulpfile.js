@@ -55,14 +55,14 @@ gulp.task('copy:sass', () => {
 gulp.task('copy:images', () => {
   console.log('Coping image files...');
 
-	return gulp.src(['app/images/*.*', 'app/images/touch/*.*'])
+	return gulp.src(['app/images/*.*'])
 		.pipe(gulp.dest('dist/images'));
 });
 
 gulp.task('copy:others', () => {
   console.log('Coping other files...');
 
-	return gulp.src(['app/favicon.', 'app/manifest.json', 'app/sw.js', './server.js'])
+	return gulp.src(['app/favicon.ico', 'app/manifest.json', 'app/sw.js', './server.js'])
 		.pipe(gulp.dest('dist'));
 });
 
