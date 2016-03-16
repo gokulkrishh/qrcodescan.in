@@ -15,18 +15,18 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="theme-color" content="#00bcd4">
-    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/touch/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/touch/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/touch/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/touch/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/touch/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/touch/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/touch/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/touch/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/touch/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/touch/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/touch/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/touch/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
     <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,medium&amp;lang=en" rel="stylesheet" type="text/css">
@@ -69,13 +69,22 @@
 
           <p class="custom-msg">Press fab button to scan your barcode</p>
 
+          <div id="qr-code"></div>
+
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect custom-btn">
             <i class="material-icons">camera_enhance</i>
           </button>
+
+          <!-- Snackbar -->
+          <div id="toast-notification" class="mdl-js-snackbar mdl-snackbar">
+            <div class="mdl-snackbar__text"></div>
+            <button class="mdl-snackbar__action" type="button"></button>
+          </div>
         </div>
       </main>
     </div>
 
     <script src="/js/app.js"></script>
+    <script src="/scanner.js"></script>
   </body>
 </html>

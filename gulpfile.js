@@ -89,7 +89,8 @@ function createBundler(src) {
 }
 
 var bundlers = {
-  'sw.js': createBundler('./app/sw.js')
+  'sw.js': createBundler('./app/sw.js'),
+  'scanner.js': createBundler('./app/scanner.js')
 };
 
 function bundle(bundler, outputPath) {
