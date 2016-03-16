@@ -62,14 +62,14 @@ gulp.task('copy:images', () => {
 gulp.task('copy:others', () => {
   console.log('Coping other files...');
 
-	return gulp.src(['app/favicon.ico', 'app/manifest.json', 'app/decoder.min.js'])
+	return gulp.src(['app/favicon.ico', 'app/manifest.json', 'app/js/main.js', 'app/decoder.min.js'])
 		.pipe(gulp.dest('dist'));
 });
 
 gulp.task('copy:js', function () {
   console.log('Coping js files...');
 
-  return gulp.src(['app/js/vendor/*.js', 'app/js/*.js'])
+  return gulp.src(['app/js/vendor/*.js', 'app/js/*.js', '!app/js/main.js'])
     .pipe(concat('app.js'))
 		.pipe(gulp.dest('dist/js'));
 });

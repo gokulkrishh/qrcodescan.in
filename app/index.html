@@ -67,14 +67,29 @@
       <main class="mdl-layout__content">
         <div class="page-content">
 
-          <p class="custom-msg">Press fab button to scan your barcode</p>
+          <p class="custom-msg">Press below button to scan your QR code</p>
 
           <video autoplay="true" id="webcam" width=320></video>
-          <input type="text" class="custom-textbox">
 
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect custom-btn">
             <i class="material-icons">camera_enhance</i>
           </button>
+
+          <dialog id="dialog" class="mdl-dialog">
+            <div class="mdl-dialog__content">
+              <p>
+                Copy the result or press open to open url in browser
+              </p>
+
+              <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" id="result">
+              </div>
+            </div>
+            <div class="mdl-dialog__actions">
+              <button type="button" class="mdl-button open-btn">Open</button>
+              <button type="button" class="mdl-button close-btn">Close</button>
+            </div>
+          </dialog>
 
           <!-- Snackbar -->
           <div id="toast-notification" class="mdl-js-snackbar mdl-snackbar">
@@ -86,35 +101,6 @@
     </div>
 
     <script src="/js/app.js"></script>
-    <script>
-      QRReader.init("#webcam");
-      var btn = document.querySelector('.custom-btn');
-      var copyTextBox = document.querySelector('.custom-textbox');
-      btn.addEventListener('click', function () {
-        scan();
-      });
-      function scan() {
-        sendToastNotification('Scanning please wait...', 1000, '#toast-notification');
-
-        QRReader.scan(function (result) {
-          copyTextBox.value = result;
-          copyTextBox.focus();
-          copyTextBox.select();
-          try {
-            var isCopied = document.execCommand('copy');
-            var msg = isCopied ? 'Result is copied to the clipboard' : 'Oops, unable to copy the result';
-            sendToastNotification(msg, 3000);
-            console.log("QR code: ", result);
-            if (!isCopied) {
-              window.prompt("Result: ", result);
-            }
-          }
-          catch (err) {
-            sendToastNotification('Oops, unable to copy the result', 3000);
-            console.log("Error in copying QR code: ", err);
-          }
-        });
-      }
-    </script>
+    <script src="/main.js"></script>
   </body>
 </html>
