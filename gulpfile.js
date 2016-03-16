@@ -62,7 +62,7 @@ gulp.task('copy:images', () => {
 gulp.task('copy:others', () => {
   console.log('Coping other files...');
 
-	return gulp.src(['app/favicon.ico', 'app/manifest.json', 'app/js/main.js', 'app/decoder.min.js'])
+	return gulp.src(['app/manifest.json', 'app/js/main.js', 'app/decoder.min.js'])
 		.pipe(gulp.dest('dist'));
 });
 
@@ -127,7 +127,7 @@ gulp.task('watch', function () {
   var SASS = gulp.watch(['app/css/**/*.scss'], ['copy:sass']);
   var IMG  = gulp.watch(['app/images/*.*'], ['copy:images']);
   var BROWSERIFY  = gulp.watch(['app/sw.js'], ['browserify']);
-  var OTHERS  = gulp.watch(['app/manifest.json', './server.js'], ['copy:others']);
+  var OTHERS  = gulp.watch(['app/manifest.json', 'app/js/main.js'], ['copy:others']);
 
   var log = function (event) {
     if (event.type === 'deleted') {

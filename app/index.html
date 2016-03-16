@@ -2,31 +2,34 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Barcode Scanner</title>
+    <title>QR Code Scanner</title>
     <meta http-equiv=X-UA-Compatible content="IE=edge">
-    <meta name=description content="A progressive web app for barcode scanning">
+    <meta name=description content="QR code scanner progressive web app">
     <meta name=viewport content="width=device-width, initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Barcode Scanner">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="QR code scanner"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="#00bcd4">
-    <meta name="apple-mobile-web-app-title" content="Barcode Scanner">
-    <meta name="msapplication-TileColor" content="#00bcd4">
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="theme-color" content="#00bcd4">
-    <link rel="apple-touch-icon" sizes="60x60" href="/images/touch/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/images/touch/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/images/touch/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/images/touch/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/touch/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/images/touch/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/images/touch/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/touch/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/images/touch/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/touch/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/images/touch/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/touch/favicon-16x16.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="QR code scanner"/>
+    <meta name="msapplication-TileColor" content="#da532c"/>
+    <meta name="msapplication-TileImage" content="/images/touch/mstile-144x144.png"/>
+    <meta name="theme-color" content="#00bcd4"/>
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/touch/apple-touch-icon-57x57.png"/>
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/touch/apple-touch-icon-60x60.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/touch/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/touch/apple-touch-icon-76x76.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/touch/apple-touch-icon-114x114.png"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/touch/apple-touch-icon-120x120.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/touch/apple-touch-icon-144x144.png"/>
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/touch/apple-touch-icon-152x152.png"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/touch/apple-touch-icon-180x180.png"/>
+    <link rel="icon" type="image/png" href="/images/touch/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="/images/touch/favicon-194x194.png" sizes="194x194"/>
+    <link rel="icon" type="image/png" href="/images/touch/favicon-96x96.png" sizes="96x96"/>
+    <link rel="icon" type="image/png" href="/images/touch/android-chrome-192x192.png" sizes="192x192"/>
+    <link rel="icon" type="image/png" href="/images/touch/favicon-16x16.png" sizes="16x16"/>
+    <link rel="shortcut icon" href="/images/touch/favicon.ico">
+    <link rel="mask-icon" href="/images/touch/safari-pinned-tab.svg" color="#5bbad5"/>
     <link rel="manifest" href="/manifest.json">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
     <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,medium&amp;lang=en" rel="stylesheet" type="text/css">
@@ -67,13 +70,15 @@
       <main class="mdl-layout__content">
         <div class="page-content">
 
-          <p class="custom-msg">Press below button to scan your QR code</p>
+          <!-- <p class="custom-msg">Press below button to scan your QR code</p> -->
 
           <video autoplay="true" id="webcam" width=320></video>
 
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect custom-btn">
             <i class="material-icons">camera_enhance</i>
           </button>
+
+          <textarea class="custom-textarea">Hello I'm some text</textarea>
 
           <dialog id="dialog" class="mdl-dialog">
             <div class="mdl-dialog__content">

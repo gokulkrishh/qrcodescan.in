@@ -16,7 +16,6 @@ function isURL(url) {
 QRReader.init("#webcam");
 
 var btn = document.querySelector('.custom-btn');
-var textBox = document.querySelector('.mdl-textfield__input');
 var openBtn = document.querySelector('.open-btn');
 
 var dialog = document.querySelector('dialog');
@@ -28,12 +27,8 @@ dialog.querySelector('.close-btn').addEventListener('click', function() {
 
 //Dialog to show if copy to clipboard fails
 dialog.querySelector('.open-btn').addEventListener('click', function() {
-  if (isURL(textBox.value)) {
-    window.location = textBox.value;
-  }
-  else {
-
-  }
+  window.location = textBox.value;
+  dialog.close();
 });
 
 //Fab scan btn
@@ -41,32 +36,43 @@ btn.addEventListener('click', function () {
   scan();
 });
 
+var copiedText = null;
+
+//To open scanner url in browser
+function openInBrowser(event) {
+  window.location = copiedText;
+}
+
 //To scan QR code
 function scan() {
-  sendToastNotification('Scanning please wait...', 1000, '#toast-notification');
+  sendToastNotification('Scanning please wait...', 1000);
 
   QRReader.scan(function (result) {
-    textBox.value = result;
-    textBox.focus();
-    textBox.select();
+    var msg, textBoxEle;
+    textBoxEle = document.querySelector('#result');
+    textBoxEle.value = result;
+    textBoxEle.select();
+    copiedText = result;
+
     try {
-      var isCopied = document.execCommand('copy');
-      var msg = isCopied ? 'Result is copied to the clipboard' : 'Oops, unable to copy the result';
-      sendToastNotification(msg, 3000);
+      var successful = document.execCommand('copy');
+      msg = successful ? 'successful' : 'unsuccessful';
       console.log("QR code: ", result);
-      if (!isCopied) {
-        if (!isURL(result)) {
-          openBtn.classList.add('hide');
-        }
-        else {
-          openBtn.classList.remove('hide');
-        }
-        dialog.showModal();
-      }
     }
     catch (err) {
-      sendToastNotification('Oops, unable to copy the result', 3000);
-      console.log("Error in copying QR code: ", err);
+      console.log('Oops, unable to copy to clipboard', err);
+    }
+
+    if (msg) {
+      if (!isURL(result)) {
+        sendToastNotification('Result is copied to the clipboard', 3000);
+      }
+      else {
+        sendToastNotification('Result is copied to the clipboard', 4000, 'open', openInBrowser);
+      }
+    }
+    else {
+      sendToastNotification('Oops, unable to copy to clipboard', 3000);
     }
   });
 }

@@ -1,12 +1,17 @@
 
 //To send toast notification
-function sendToastNotification(msg, timer) {
+function sendToastNotification(msg, timer, actionText, actionHandler) {
 	var notification = document.querySelector('#toast-notification');
 
 	var data = {
 		message: msg || "",
 		timeout: timer || 2000
 	};
+
+	if (actionText && actionHandler) {
+		data.actionHandler =  actionHandler;
+		data.actionText =  'open';
+	}
 
 	notification.MaterialSnackbar.showSnackbar(data);
 }

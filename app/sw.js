@@ -8,7 +8,11 @@ var filesToCache = [
   '/index.html',
   '/css/styles.css',
   '/js/app.js',
-  '/images/touch/android-icon-192x192.png'
+  '/main.js',
+  '/decoder.min.js',
+  '/images/touch/android-chrome-192x192.png',
+  '/images/touch/favicon-96x96.png',
+  '/images/touch/favicon-194x194.png'
 ];
 
 self.oninstall = function(event) {

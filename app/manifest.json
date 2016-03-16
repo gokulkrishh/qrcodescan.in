@@ -1,27 +1,30 @@
 
 {
-  "short_name": "Barcode Scanner",
-  "name": "Barcode Scanner",
-  "description": "A barcode scanner progressive web app",
+  "short_name": "QR Code Scanner",
+  "name": "QR Code Scanner",
+  "description": "A progressive web app for QR code scanner",
   "display": "standalone",
-  "version": "1.0.0",
   "orientation": "portrait",
-  "icons": [{
-        "src": "images/touch/android-icon-144x144.png",
-        "sizes": "144x144",
-        "type": "image/png"
-    }, {
-        "src": "images/touch/apple-icon-152x152.png",
-        "sizes": "152x152",
-        "type": "image/png"
-    }, {
-        "src": "images/touch/ms-icon-144x144.png",
-        "sizes": "144x144",
-        "type": "image/png"
-    }, {
-        "src": "images/touch/android-icon-192x192.png",
-        "sizes": "192x192",
-        "type": "image/png"
+  "icons": [
+	{
+		"src": "/images/touch/android-chrome-144x144.png",
+		"sizes": "144x144",
+		"type": "image/png"
+	},
+	{
+		"src": "/images/touch/android-chrome-192x192.png",
+		"sizes": "192x192",
+		"type": "image/png"
+	},
+  {
+    "src": "/images/touch/apple-touch-icon-152x152.png",
+    "sizes": "152x152",
+    "type": "image/png"
+  },
+  {
+    "src": "/images/touch/apple-touch-icon-180x180.png",
+    "sizes": "180x180",
+    "type": "image/png"
   }],
   "start_url": "/",
   "theme_color": "#00bcd4",
