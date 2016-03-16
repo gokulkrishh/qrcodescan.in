@@ -69,11 +69,8 @@
 
           <p class="custom-msg">Press fab button to scan your barcode</p>
 
-          <!-- <div id="qr-code"></div> -->
-
           <video autoplay="true" id="webcam" width=320></video>
-
-          <input type="text" class="custom-textbox" value="">
+          <input type="text" class="custom-textbox">
 
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect custom-btn">
             <i class="material-icons">camera_enhance</i>
@@ -97,10 +94,10 @@
         scan();
       });
       function scan() {
-        sendToastNotification('Scanning please wait...', 2000, '#toast-notification');
+        sendToastNotification('Scanning please wait...', 1000, '#toast-notification');
 
         QRReader.scan(function (result) {
-          copyTextBox.textContent = result;
+          copyTextBox.value = result;
           copyTextBox.focus();
           copyTextBox.select();
           try {

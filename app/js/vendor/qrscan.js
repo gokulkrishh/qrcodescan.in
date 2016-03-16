@@ -69,10 +69,10 @@ QRReader.init = function (webcam_selector, baseurl) {
 
 				// If no specific environment camera is found (non-smartphone), user chooses
 				if (!found_env_cam) startCapture(null);
-			},
-			function (error) {
-				console.error("Error occurred : ", error);
 			})
+			.catch(function (error) {
+				console.error("Error occurred : ", error);
+			});
 		//Below code is deprecated: https://www.chromestatus.com/feature/4765305641369600
 		// MediaStreamTrack.getSources(function (sources) {
 		// 	var found_env_cam = false;
