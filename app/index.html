@@ -69,7 +69,11 @@
 
           <p class="custom-msg">Press fab button to scan your barcode</p>
 
-          <div id="qr-code"></div>
+          <!-- <div id="qr-code"></div> -->
+
+          <video autoplay="true" id="webcam" width=320></video>
+
+          <ul id="list"></ul>
 
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect custom-btn">
             <i class="material-icons">camera_enhance</i>
@@ -85,6 +89,21 @@
     </div>
 
     <script src="/js/app.js"></script>
-    <script src="/scanner.js"></script>
+    <script>
+      QRReader.init("#webcam");
+      var btn = document.querySelector('.custom-btn');
+      btn.addEventListener('click', function () {
+        scan();
+      });
+      function scan() {
+        QRReader.scan(function (result) {
+          var list = document.getElementById("list");
+  				var li = document.createElement("li");
+  				li.appendChild(document.createTextNode(result));
+  				list.appendChild(li);
+  				setTimeout(scan, 200);
+        });
+      }
+    </script>
   </body>
 </html>
