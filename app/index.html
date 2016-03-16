@@ -73,7 +73,7 @@
 
           <video autoplay="true" id="webcam" width=320></video>
 
-          <ul id="list"></ul>
+          <input type="text" class="custom-textbox" value="">
 
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect custom-btn">
             <i class="material-icons">camera_enhance</i>
@@ -92,16 +92,30 @@
     <script>
       QRReader.init("#webcam");
       var btn = document.querySelector('.custom-btn');
+      var copyTextBox = document.querySelector('.custom-textbox');
       btn.addEventListener('click', function () {
         scan();
       });
       function scan() {
+        sendToastNotification('Scanning please wait...', 2000, '#toast-notification');
+
         QRReader.scan(function (result) {
-          var list = document.getElementById("list");
-  				var li = document.createElement("li");
-  				li.appendChild(document.createTextNode(result));
-  				list.appendChild(li);
-  				setTimeout(scan, 200);
+          copyTextBox.textContent = result;
+          copyTextBox.focus();
+          copyTextBox.select();
+          try {
+            var isCopied = document.execCommand('copy');
+            var msg = isCopied ? 'Result is copied to the clipboard' : 'Oops, unable to copy the result';
+            sendToastNotification(msg, 3000);
+            console.log("QR code: ", result);
+            if (!isCopied) {
+              window.prompt("Result: ", result);
+            }
+          }
+          catch (err) {
+            sendToastNotification('Oops, unable to copy the result', 3000);
+            console.log("Error in copying QR code: ", err);
+          }
         });
       }
     </script>

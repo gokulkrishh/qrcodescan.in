@@ -62,7 +62,7 @@ gulp.task('copy:images', () => {
 gulp.task('copy:others', () => {
   console.log('Coping other files...');
 
-	return gulp.src(['app/favicon.ico', 'app/manifest.json'])
+	return gulp.src(['app/favicon.ico', 'app/manifest.json', 'app/decoder.min.js'])
 		.pipe(gulp.dest('dist'));
 });
 
