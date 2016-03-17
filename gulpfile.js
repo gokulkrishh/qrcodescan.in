@@ -5,7 +5,6 @@ var babelify = require('babelify');
 var browserSync = require('browser-sync');
 var buffer = require('vinyl-buffer')
 var concat = require('gulp-concat');
-var connect = require('gulp-connect');
 var del = require('del');
 var gulp = require('gulp');
 var reload = browserSync.reload;
@@ -15,14 +14,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var watch = require('gulp-watch');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
-
-gulp.task('serveprod', function() {
-  connect.server({
-    root: 'dist',
-    port: process.env.PORT || 5000,
-    livereload: false
-  });
-});
 
 //To serve files
 gulp.task('browserSync', () => {
@@ -156,7 +147,5 @@ gulp.task('watch', function () {
   BROWSERIFY.once('update', log);
   OTHERS.once('update', log);
 });
-
-gulp.task('serve', ['serveprod']);
 
 gulp.task('default',  ['clean', 'copy:html', 'copy:sass', 'copy:images', 'copy:js', 'browserify', 'copy:others', 'browserSync', 'watch']);
