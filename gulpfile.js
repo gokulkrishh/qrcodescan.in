@@ -5,6 +5,7 @@ var babelify = require('babelify');
 var browserSync = require('browser-sync');
 var buffer = require('vinyl-buffer')
 var concat = require('gulp-concat');
+var connect = require('gulp-connect');
 var del = require('del');
 var gulp = require('gulp');
 var reload = browserSync.reload;
@@ -17,7 +18,7 @@ var autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('serveprod', function() {
   connect.server({
-    root: '/dest',
+    root: 'dist',
     port: process.env.PORT || 5000,
     livereload: false
   });
