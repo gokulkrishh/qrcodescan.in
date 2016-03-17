@@ -15,6 +15,14 @@ var watch = require('gulp-watch');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 
+gulp.task('serveprod', function() {
+  connect.server({
+    root: '/dest',
+    port: process.env.PORT || 5000,
+    livereload: false
+  });
+});
+
 //To serve files
 gulp.task('browserSync', () => {
   browserSync({
@@ -147,5 +155,7 @@ gulp.task('watch', function () {
   BROWSERIFY.once('update', log);
   OTHERS.once('update', log);
 });
+
+gulp.task('serve', ['serveprod']);
 
 gulp.task('default',  ['clean', 'copy:html', 'copy:sass', 'copy:images', 'copy:js', 'browserify', 'copy:others', 'browserSync', 'watch']);
