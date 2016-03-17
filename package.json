@@ -26,7 +26,8 @@
     "node": "4.1.1"
   },
   "scripts": {
-    "start": "gulp serve",
-    "build": "gulp"
+    "start": "gulp && gulp serve",
+    "build": "gulp",
+    "serve": "gulp serve"
   }
 }
