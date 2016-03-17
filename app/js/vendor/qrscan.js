@@ -101,7 +101,8 @@ QRReader.init = function (webcam_selector, baseurl) {
 				var found_env_cam = false;
 				devices.forEach(function(device) {
 		      console.log(device.kind + " : " + device.label + " id = " + device.deviceId);
-					if (device.kind == "videoinput" && device.label == "camera 0, facing back") {
+					var deviceLabel = device.label.split(',')[1];
+					if (device.kind == "videoinput" && deviceLabel == " facing back") {
 						var constraints = {
 							video: {
 								deviceId: device.deviceId ? { exact: device.deviceId } : undefined

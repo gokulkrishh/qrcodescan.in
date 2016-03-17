@@ -25,6 +25,7 @@
   position: fixed;
   right: 5%;
   bottom: 55px;
+  background: #374850;
 
   svg {
     position: relative;
@@ -44,6 +45,10 @@
   bottom: 0;
   right: 0;
   font-size: 16px;
+}
+
+.custom-fab-icon {
+  color: #fff;
 }
 
 @media (max-width: 479px) {
@@ -66,7 +71,7 @@
   }
 }
 
-.custom-textarea {
+.custom-copy-btn {
   opacity: 0;
 }
 

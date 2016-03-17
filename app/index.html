@@ -8,12 +8,12 @@
     <meta name=viewport content="width=device-width, initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="QR code scanner"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="#00bcd4">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#607d8b">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="QR code scanner"/>
     <meta name="msapplication-TileColor" content="#da532c"/>
     <meta name="msapplication-TileImage" content="/images/touch/mstile-144x144.png"/>
-    <meta name="theme-color" content="#00bcd4"/>
+    <meta name="theme-color" content="#607d8b"/>
     <link rel="apple-touch-icon" sizes="57x57" href="/images/touch/apple-touch-icon-57x57.png"/>
     <link rel="apple-touch-icon" sizes="60x60" href="/images/touch/apple-touch-icon-60x60.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="/images/touch/apple-touch-icon-72x72.png"/>
@@ -70,20 +70,16 @@
       <main class="mdl-layout__content">
         <div class="page-content">
 
-          <!-- <p class="custom-msg">Press below button to scan your QR code</p> -->
-
           <video autoplay="true" id="webcam" width=320></video>
 
-          <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect custom-btn">
-            <i class="material-icons">camera_enhance</i>
+          <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored custom-btn">
+            <i class="material-icons custom-fab-icon">&#xE8FC;</i>
           </button>
-
-          <textarea class="custom-textarea">Hello I'm some text</textarea>
 
           <dialog id="dialog" class="mdl-dialog">
             <div class="mdl-dialog__content">
               <p>
-                Copy the result or press open to open url in browser
+                Copy QR code
               </p>
 
               <div class="mdl-textfield mdl-js-textfield">
@@ -91,7 +87,7 @@
               </div>
             </div>
             <div class="mdl-dialog__actions">
-              <button type="button" class="mdl-button open-btn">Open</button>
+              <button type="button" class="mdl-button copy-btn">Copy</button>
               <button type="button" class="mdl-button close-btn">Close</button>
             </div>
           </dialog>
