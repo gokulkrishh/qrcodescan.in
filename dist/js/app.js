@@ -606,8 +606,12 @@ QRReader.init = function (webcam_selector, baseurl) {
 	function startCapture(constraints) {
 		if (!constraints) {
 			constraints = {
-				audio: false,
-				video: true
+				video: {
+					mandatory: {
+						sourceId: null
+					}
+				},
+				audio: false
 			};
 		}
 		// Start video capturing
@@ -634,7 +638,9 @@ QRReader.init = function (webcam_selector, baseurl) {
 					if (device.kind == "videoinput" && deviceLabel == " facing back") {
 						var constraints = {
 							video: {
-								deviceId: device.deviceId ? { exact: device.deviceId } : undefined
+								mandatory: {
+									sourceId: device.deviceId ? device.deviceId : undefined
+								}
 							},
 							audio: false
 						};
