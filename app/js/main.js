@@ -62,7 +62,7 @@ function scan() {
     var msg = 'Result is copied to the clipboard';
     if (!isURL(result)) {
       sendToastNotification(msg, 3000);
-      modal.showDialog();
+      dialog.showModal();
     }
     else {
       sendToastNotification(msg, 4000, 'open', openInBrowser);

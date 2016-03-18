@@ -25,7 +25,7 @@ window.addEventListener('beforeinstallprompt', function(e) {
 });
 
 if ('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('../sw.js', { scope: '/' }).then((reg) => {
+	navigator.serviceWorker.register('../sw.js', { scope: '/' }).then(function(reg) {
 		if (reg.installing) {
 			console.log('Service worker installing');
 			sendToastNotification('App is ready for offline use!', 3000);
@@ -34,7 +34,7 @@ if ('serviceWorker' in navigator) {
 		} else if(reg.active) {
 			console.log('Service worker active');
 		}
-	}).catch((error) => {
+	}).catch(function(error) {
 		console.log('Registration failed with ' + error); // Registration failed
 	});
 }

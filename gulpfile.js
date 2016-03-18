@@ -1,19 +1,23 @@
 'use strict';
 
+var autoprefixer = require('gulp-autoprefixer');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var browserSync = require('browser-sync');
 var buffer = require('vinyl-buffer')
 var concat = require('gulp-concat');
+var cleanCSS = require('gulp-clean-css');
 var del = require('del');
 var gulp = require('gulp');
+var htmlmin = require('gulp-htmlmin');
 var reload = browserSync.reload;
 var mergeStream = require('merge-stream');
+var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
+var uglify = require('gulp-uglify');
 var watch = require('gulp-watch');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
+
 
 //To serve files
 gulp.task('browserSync', () => {
@@ -32,6 +36,7 @@ gulp.task('copy:html', () => {
   console.log('Coping html files...');
 
 	return gulp.src(['app/*.html'])
+    .pipe(htmlmin({collapseWhitespace: true}))
 		.pipe(gulp.dest('dist'));
 });
 
@@ -48,6 +53,7 @@ gulp.task('copy:sass', () => {
       displayError(err);
     })
     .pipe(autoprefixer())
+    .pipe(cleanCSS())
 		.pipe(gulp.dest('dist/css'));
 
 });
@@ -62,16 +68,27 @@ gulp.task('copy:images', () => {
 gulp.task('copy:others', () => {
   console.log('Coping other files...');
 
-	return gulp.src(['app/manifest.json', 'app/js/main.js', 'app/decoder.min.js'])
+	return gulp.src(['app/manifest.json'])
 		.pipe(gulp.dest('dist'));
 });
 
-gulp.task('copy:js', function () {
+gulp.task('copy:depJSFiles', () => {
+  console.log('Coping dependencies JS files...');
+
+	return gulp.src(['app/js/main.js', 'app/decoder.min.js'])
+		.pipe(uglify())
+		.pipe(gulp.dest('dist'));
+});
+
+gulp.task('copy:js', ['copy:depJSFiles'], function () {
   console.log('Coping js files...');
 
-  return gulp.src(['app/js/vendor/*.js', 'app/js/*.js', '!app/js/main.js'])
+  return gulp.src(['app/js/**/*.js', 'app/js/*.js', '!app/js/main.js'])
     .pipe(concat('app.js'))
-		.pipe(gulp.dest('dist/js'));
+    .pipe(sourcemaps.init({ loadMaps: true }))
+		.pipe(uglify())
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('dist/js'));
 });
 
 function displayError(err) {
@@ -101,6 +118,7 @@ function bundle(bundler, outputPath) {
     .on('error', displayError)
     .pipe(source(outputFile))
     .pipe(buffer())
+    .pipe(uglify())
     .pipe(sourcemaps.init({ loadMaps: true }))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('dist/' + outputDir))
