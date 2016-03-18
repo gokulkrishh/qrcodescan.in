@@ -18,9 +18,9 @@ dialog.querySelector('.close-btn').addEventListener('click', function() {
 //Close event
 dialog.querySelector('.copy-btn').addEventListener('click', function(event) {
   var result = document.querySelector('#result').value;
+  console.log("QR code: ", result);
   try {
     var isCopied = document.execCommand('copy');
-    console.log("QR code: ", result);
     if (isCopied) {
       var msg = 'Result is copied to the clipboard';
       sendToastNotification(msg, 3000);

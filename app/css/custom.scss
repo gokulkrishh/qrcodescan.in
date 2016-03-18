@@ -83,3 +83,17 @@ video {
 .hide {
   display: none;
 }
+
+.custom-focus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+  border-style: solid;
+  border-color: transparent;
+  -moz-transition: all 200ms ease-in-out;
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}

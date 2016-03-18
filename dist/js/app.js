@@ -600,17 +600,19 @@ QRReader.init = function (webcam_selector, baseurl) {
 				QRReader.webcam.clientHeight);
 			streaming = true;
 		}
+
+		// var focusEle = document.querySelector('.custom-focus');
+		//
+		// focusEle.style.borderWidth = (QRReader.canvas.width * 0.3) + "px " + (QRReader.canvas.height * 0.99) + "px";
+		// focusEle.style.borderColor = "rgba(0, 0, 0, 0.5)";
+
 	}, false);
 
 	// Start capturing video only
 	function startCapture(constraints) {
 		if (!constraints) {
-			constraints = {
-				video: {
-					mandatory: {
-						sourceId: null
-					}
-				},
+			var constraints = {
+				video: true,
 				audio: false
 			};
 		}
@@ -620,8 +622,14 @@ QRReader.init = function (webcam_selector, baseurl) {
 				QRReader.webcam.src = window.URL.createObjectURL(stream);
 			})
 			.catch(function(err) {
-				console.log("Error in navigator.getUserMedia: " + err);
+				showErrorMsg();
+				console.log("Error in navigator.getUserMedia: ", err);
 			});
+	}
+
+	function showErrorMsg() {
+		document.querySelector('.custom-btn').style.display = "none"; //Hide scan button, if error
+		sendToastNotification('Unable to open the camera, provide permission to access the camera', 4000);
 	}
 
 	// Firefox lets users choose their camera, so no need to search for an environment
@@ -653,6 +661,7 @@ QRReader.init = function (webcam_selector, baseurl) {
 				if (!found_env_cam) startCapture(null);
 			})
 			.catch(function (error) {
+				showErrorMsg();
 				console.error("Error occurred : ", error);
 			});
 		//Below code is deprecated: https://www.chromestatus.com/feature/4765305641369600
@@ -726,8 +735,16 @@ function sendToastNotification(msg, timer, actionText, actionHandler) {
 		data.actionText =  'open';
 	}
 
-	notification.MaterialSnackbar.showSnackbar(data);
+	if (notification.MaterialSnackbar && notification.MaterialSnackbar.showSnackbar) {
+		notification.MaterialSnackbar.showSnackbar(data);
+	}
 }
+
+window.addEventListener('beforeinstallprompt', function(e) {
+  console.log('beforeinstallprompt Event fired');
+  e.preventDefault();
+  return false;
+});
 
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('../sw.js', { scope: '/' }).then((reg) => {
