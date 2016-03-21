@@ -34,6 +34,6 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "gulp"
+    "build": "gulp clean && gulp"
   }
 }

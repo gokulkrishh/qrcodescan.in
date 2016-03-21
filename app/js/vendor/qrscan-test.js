@@ -66,14 +66,27 @@ QRReader.init = function (webcam_selector, baseurl) {
 	// Resize webcam according to input
 	QRReader.webcam.addEventListener("play", function (ev) {
 		if (!streaming) {
-			QRReader.canvas.width = window.innerWidth;
-			QRReader.canvas.height = window.innerHeight;
+			QRReader.canvas.width = 600;
+			QRReader.canvas.height = Math.ceil(600 / QRReader.webcam.clientWidth *
+				QRReader.webcam.clientHeight);
 			streaming = true;
 		}
+
+		// var focusEle = document.querySelector('.custom-focus');
+		//
+		// focusEle.style.borderWidth = (QRReader.canvas.width * 0.3) + "px " + (QRReader.canvas.height * 0.99) + "px";
+		// focusEle.style.borderColor = "rgba(0, 0, 0, 0.5)";
+
 	}, false);
 
 	// Start capturing video only
 	function startCapture(constraints) {
+		if (!constraints) {
+			var constraints = {
+				video: true,
+				audio: false
+			};
+		}
 		// Start video capturing
 		navigator.mediaDevices.getUserMedia(constraints)
 			.then(function (stream) {
@@ -87,41 +100,83 @@ QRReader.init = function (webcam_selector, baseurl) {
 
 	function showErrorMsg() {
 		document.querySelector('.custom-btn').style.display = "none"; //Hide scan button, if error
-		sendToastNotification('Unable to open the camera, provide permission to access the camera', 5000);
+		sendToastNotification('Unable to open the camera, provide permission to access the camera', 6000);
+	}
+
+	var selectDropDown = document.querySelector(".video-source");
+	var selectBtn = document.querySelector(".select-video-source");
+	var dialog = document.querySelector('#select-camera');
+	var found_env_cam = false;
+
+	//Close event
+	dialog.querySelector('.close-video-source').addEventListener('click', function() {
+	  dialog.close();
+	});
+
+	//Handle video source selection
+	function selectVideoSource(event) {
+		console.log(selectDropDown.selectedIndex);
+
+		var deviceId = selectDropDown.selectedOptions[0].value;
+
+		var constraints = {
+			video: {
+				mandatory: {
+					sourceId: deviceId ? deviceId : undefined
+				}
+			},
+			audio: false
+		};
+
+		startCapture(constraints);
+		found_env_cam = true;
+
+		// If no specific environment camera is found (non-smartphone), user chooses
+		if (!found_env_cam) startCapture(null);
+
+		dialog.close();
 	}
 
 	// Firefox lets users choose their camera, so no need to search for an environment
 	// facing camera
-	if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)
+	if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1 || navigator.userAgent.toLowerCase().indexOf('Opera') > -1)
 		startCapture(null);
 	else {
 		navigator.mediaDevices.enumerateDevices()
 			.then(function (devices) {
-				var found_env_cam = false;
+				console.log("devices : ", devices);
 				devices.forEach(function(device) {
-		      console.log(device.kind + " : " + device.label + " id = " + device.deviceId);
-					var deviceLabel = device.label.split(',')[1];
-					if (device.kind == "videoinput" && deviceLabel == " facing back") {
-						var constraints = {
-							video: {
-								mandatory: {
-									sourceId: device.deviceId ? device.deviceId : undefined
-								}
-							},
-							audio: false
-						};
-						startCapture(constraints);
-						found_env_cam = true;
+					if (device.kind === "videoinput") {
+						var optionEle = document.createElement("option");
+						optionEle.value = device.deviceId;
+						optionEle.textContent = device.label;
+						console.log(optionEle);
+						selectDropDown.appendChild(optionEle);
 					}
 		    });
 
-				// If no specific environment camera is found (non-smartphone), user chooses
-				if (!found_env_cam) startCapture({ video: true });
+				selectBtn.addEventListener('click', selectVideoSource, false);
+				dialog.showModal();
 			})
 			.catch(function (error) {
 				showErrorMsg();
 				console.error("Error occurred : ", error);
 			});
+		//Below code is deprecated: https://www.chromestatus.com/feature/4765305641369600
+		// MediaStreamTrack.getSources(function (sources) {
+		// 	var found_env_cam = false;
+		// 	for (var i = 0; i < sources.length; i++) {
+		// 		if (sources[i].kind == "video" && sources[i].facing == "user") {
+		// 			var constraints = {optional: [{sourceId: sources[i].id}]};
+		// 			startCapture(constraints);
+		//
+		// 			found_env_cam = true;
+		// 		}
+		// 	}
+		//
+		// 	// If no specific environment camera is found (non-smartphone), user chooses
+		// 	if (!found_env_cam) startCapture(null);
+		// });
 	}
 }
 

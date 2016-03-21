@@ -9,10 +9,11 @@ var filesToCache = [
   '/css/styles.css',
   '/js/app.js',
   '/main.js',
-  '/decoder.min.js',
   '/images/touch/android-chrome-192x192.png',
   '/images/touch/favicon-96x96.png',
-  '/images/touch/favicon-194x194.png'
+  '/images/touch/favicon-194x194.png',
+  'https://fonts.googleapis.com/css?family=Material+Icons',
+  'https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,medium&amp;lang=en'
 ];
 
 self.oninstall = function(event) {

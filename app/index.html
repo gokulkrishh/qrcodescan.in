@@ -45,12 +45,12 @@
 
       <header class="mdl-layout__header is-casting-shadow">
         <div class="mdl-layout__header-row">
-          <span class="mdl-layout-title custom-title">Barcode Scanner</span>
+          <span class="mdl-layout-title custom-title">QR Code Scanner</span>
         </div>
       </header>
 
       <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Barcode Scanner</span>
+        <span class="mdl-layout-title">QR Code Scanner</span>
         <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="https://github.com/code-kotis/barcode-scanner">
             <i class="material-icons">info_outline</i>
@@ -72,24 +72,39 @@
 
           <video autoplay="true" id="webcam"></video>
 
-          <!-- <div class="custom-focus"></div> -->
-
           <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored custom-btn">
             <i class="material-icons custom-fab-icon">&#xE8FC;</i>
           </button>
 
+          <!-- <dialog id="select-camera" class="mdl-dialog">
+            <div class="mdl-dialog__content">
+              <h5>
+                Video Source
+              </h5>
+
+              <div class="mdl-textfield mdl-js-textfield">
+                <select class="video-source">
+
+                </select>
+              </div>
+            </div>
+            <div class="mdl-dialog__actions">
+              <button type="button" class="mdl-button select-video-source">Select</button>
+              <button type="button" class="mdl-button close-video-source">Cancel</button>
+            </div>
+          </dialog> -->
+
           <dialog id="dialog" class="mdl-dialog">
             <div class="mdl-dialog__content">
-              <p>
+              <h5>
                 Copy QR code
-              </p>
+              </h5>
 
               <div class="mdl-textfield mdl-js-textfield">
                 <input class="mdl-textfield__input" type="text" id="result">
               </div>
             </div>
             <div class="mdl-dialog__actions">
-              <button type="button" class="mdl-button copy-btn">Copy</button>
               <button type="button" class="mdl-button close-btn">Close</button>
             </div>
           </dialog>

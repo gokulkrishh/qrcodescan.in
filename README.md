@@ -1,7 +1,5 @@
 # QR Code Scanner
 
-A progressive web app QR code scanner
+*A progressive web app*
 
-## Todo's
-
- - [ ] - Fix for chrome & opera rear camera
+# [demo](https://qrcode-scanner.herokuapp.com)

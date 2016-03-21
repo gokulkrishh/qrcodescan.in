@@ -8,31 +8,11 @@ QRReader.init("#webcam");
 
 var btn = document.querySelector('.custom-btn');
 var openBtn = document.querySelector('.open-btn');
-var dialog = document.querySelector('dialog');
+var dialog = document.querySelector('#dialog');
 
 //Close event
 dialog.querySelector('.close-btn').addEventListener('click', function() {
   dialog.close();
-});
-
-//Close event
-dialog.querySelector('.copy-btn').addEventListener('click', function(event) {
-  var result = document.querySelector('#result').value;
-  console.log("QR code: ", result);
-  try {
-    var isCopied = document.execCommand('copy');
-    if (isCopied) {
-      var msg = 'Result is copied to the clipboard';
-      sendToastNotification(msg, 3000);
-      dialog.close();
-    }
-    else {
-      sendToastNotification('Oops, unable to copy to clipboard', 2000);
-    }
-  }
-  catch (err) {
-    console.log('Oops, unable to copy to clipboard', err);
-  }
 });
 
 //Fab scan btn
@@ -44,12 +24,12 @@ var copiedText = null;
 
 //To open scanner url in browser
 function openInBrowser(event) {
-  window.location = copiedText;
+  window.open(copiedText, '_blank', '');
 }
 
 //To scan QR code
 function scan() {
-  sendToastNotification('Scanning please wait...', 1000);
+  sendToastNotification('Scanning please wait...', 3000);
 
   QRReader.scan(function (result) {
     var msg, textBoxEle, copyTextBtn;
@@ -59,13 +39,11 @@ function scan() {
     textBoxEle.select();
     copiedText = result;
 
-    var msg = 'Result is copied to the clipboard';
     if (!isURL(result)) {
-      sendToastNotification(msg, 3000);
       dialog.showModal();
     }
     else {
-      sendToastNotification(msg, 4000, 'open', openInBrowser);
+      sendToastNotification('Open the result in your browser', 5000, 'open', openInBrowser);
     }
   });
 }
