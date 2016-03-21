@@ -93,7 +93,7 @@ QRReader.init = function (webcam_selector, baseurl) {
 	// Firefox lets users choose their camera, so no need to search for an environment
 	// facing camera
 	if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)
-		startCapture(null);
+		startCapture({ video: true });
 	else {
 		navigator.mediaDevices.enumerateDevices()
 			.then(function (devices) {
