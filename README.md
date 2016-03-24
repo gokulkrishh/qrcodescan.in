@@ -2,9 +2,7 @@
 
 *A progressive web application*
 
-![qrcode-scanner](https://github.com/code-kotis/barcode-scanner/raw/master/logo.png "qrcode-scanner")
-
-# [demo](https://qrcode-scanner.herokuapp.com)
+#[demo](https://qrcode-scanner.herokuapp.com)
 
 ## Features
 
@@ -20,21 +18,19 @@
 
 1. Clone the repo
 
-```
-  git clone https://github.com/code-kotis/barcode-scanner
-```
+  ```bash
+    git clone https://github.com/code-kotis/barcode-scanner
+  ```
 
 2. Build installation
-
-```
- npm install
-```
+  ```bash
+  npm install
+  ```
 
 3. Run the project
-
-```
- gulp build
-```
+  ```bash
+  gulp build
+  ```
 
 ### Contributions
 
