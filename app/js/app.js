@@ -10,7 +10,10 @@ function sendToastNotification(msg, timer, actionText, actionHandler) {
 		data.actionHandler =  actionHandler;
 		data.actionText =  'open';
 	}
-	notification.MaterialSnackbar.showSnackbar(data);
+
+	if (notification && notification.MaterialSnackbar) {
+		notification.MaterialSnackbar.showSnackbar(data);
+	}
 }
 
 //Prevent prompt from asking

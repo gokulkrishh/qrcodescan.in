@@ -23,7 +23,7 @@ var watch = require('gulp-watch');
 gulp.task('browserSync', () => {
   browserSync({
     notify: false,
-    port: 5000,
+    port: 9000,
     server: 'dist/',
     open: false
   });

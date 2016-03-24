@@ -97,26 +97,43 @@ QRReader.init = function (webcam_selector, baseurl) {
 	else {
 		navigator.mediaDevices.enumerateDevices()
 			.then(function (devices) {
-				var found_env_cam = false;
-				devices.forEach(function(device) {
+				var device = devices.filter(function(device) {
 		      console.log(device.kind + " : " + device.label + " id = " + device.deviceId);
 					var deviceLabel = device.label.split(',')[1];
-					if (device.kind == "videoinput" && deviceLabel == " facing back") {
-						var constraints = {
-							video: {
-								mandatory: {
-									sourceId: device.deviceId ? device.deviceId : undefined
-								}
-							},
-							audio: false
-						};
-						startCapture(constraints);
-						found_env_cam = true;
+					if (device.kind == "videoinput") {
+						return device;
 					}
 		    });
 
-				// If no specific environment camera is found (non-smartphone), user chooses
-				if (!found_env_cam) startCapture({ video: true });
+				console.log("Found video device : ", device);
+
+				if (device.length > 1) {
+					var constraints = {
+						video: {
+							mandatory: {
+								sourceId: device[1].deviceId ? device[1].deviceId : null
+							}
+						},
+						audio: false
+					};
+
+					startCapture(constraints);
+				}
+				else if (device.length) {
+					var constraints = {
+						video: {
+							mandatory: {
+								sourceId: device[0].deviceId ? device[0].deviceId : null
+							}
+						},
+						audio: false
+					};
+
+					startCapture(constraints);
+				}
+				else {
+					startCapture({video:true});
+				}
 			})
 			.catch(function (error) {
 				showErrorMsg();
