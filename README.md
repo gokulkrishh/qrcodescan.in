@@ -2,7 +2,7 @@
 
 *A progressive web application*
 
-![qrcode-scanner](https://github.com/code-kotis/barcode-scanner/raw/master/logo.png "qrcode-scanner")
+![qrcode-scanner](https://github.com/code-kotis/barcode-scanner/raw/master/logo.png =200x200 "qrcode-scanner")
 
 # [demo](https://qrcode-scanner.herokuapp.com)
 
