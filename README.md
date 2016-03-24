@@ -18,21 +18,19 @@
 
 1. Clone the repo
 
-```
-  git clone https://github.com/code-kotis/barcode-scanner
-```
+  ```bash
+    git clone https://github.com/code-kotis/barcode-scanner
+  ```
 
 2. Build installation
-
-```
- npm install
-```
+  ```bash
+  npm install
+  ```
 
 3. Run the project
-
-```
- gulp build
-```
+  ```bash
+  gulp build
+  ```
 
 ### Contributions
 
