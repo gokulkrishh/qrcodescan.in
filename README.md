@@ -2,7 +2,7 @@
 
 *A progressive web application*
 
-#[demo](https://qrcode-scanner.herokuapp.com)
+#[Link](https://qrcodescan.in)
 
 ## Features
 
