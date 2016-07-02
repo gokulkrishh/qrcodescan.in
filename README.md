@@ -29,7 +29,7 @@
 
 3. Run the project
   ```bash
-  gulp build
+  gulp
   ```
 
 ### Contributions

@@ -77,11 +77,11 @@ QRReader.init = function (webcam_selector, baseurl) {
 		// Start video capturing
 		navigator.mediaDevices.getUserMedia(constraints)
 			.then(function (stream) {
-				QRReader.webcam.src = window.URL.createObjectURL(stream);
+				var myURL = window.URL || window.webkitURL;
+				document.querySelector("#webcam").src = myURL.createObjectURL(stream);
 			})
 			.catch(function(err) {
 				showErrorMsg();
-				console.log("Error in navigator.getUserMedia: ", err);
 			});
 	}
 
@@ -98,14 +98,11 @@ QRReader.init = function (webcam_selector, baseurl) {
 		navigator.mediaDevices.enumerateDevices()
 			.then(function (devices) {
 				var device = devices.filter(function(device) {
-		      console.log(device.kind + " : " + device.label + " id = " + device.deviceId);
-					var deviceLabel = device.label.split(',')[1];
+		      var deviceLabel = device.label.split(',')[1];
 					if (device.kind == "videoinput") {
 						return device;
 					}
 		    });
-
-				console.log("Found video device : ", device);
 
 				if (device.length > 1) {
 					var constraints = {
@@ -137,7 +134,6 @@ QRReader.init = function (webcam_selector, baseurl) {
 			})
 			.catch(function (error) {
 				showErrorMsg();
-				console.error("Error occurred : ", error);
 			});
 	}
 }
