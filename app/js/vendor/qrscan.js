@@ -77,8 +77,7 @@ QRReader.init = function (webcam_selector, baseurl) {
 		// Start video capturing
 		navigator.mediaDevices.getUserMedia(constraints)
 			.then(function (stream) {
-				var myURL = window.URL || window.webkitURL;
-				document.querySelector("#webcam").src = myURL.createObjectURL(stream);
+				document.querySelector("video").srcObject = stream;
 			})
 			.catch(function(err) {
 				showErrorMsg();
