@@ -6,7 +6,9 @@ function isURL(url) {
 }
 
 //Initializing qr scanner
-QRReader.init('#webcam');
+window.addEventListener("load", function(event) {
+  QRReader.init();
+});
 
 var btn = document.querySelector('.custom-btn');
 var openBtn = document.querySelector('.open-btn');

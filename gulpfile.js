@@ -83,7 +83,7 @@ gulp.task('copy:depJSFiles', () => {
 gulp.task('copy:js', ['copy:depJSFiles'], function () {
   console.log('Coping js files...');
 
-  return gulp.src(['app/js/**/*.js', 'app/js/*.js', '!app/js/main.js'])
+  return gulp.src(['app/js/vendor/adapter.js', 'app/js/vendor/*.js', 'app/js/*.js', '!app/js/main.js'])
     .pipe(concat('app.js'))
     .pipe(sourcemaps.init({ loadMaps: true }))
 		.pipe(uglify())

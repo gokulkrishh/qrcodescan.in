@@ -1,66 +1,19 @@
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia
-	|| navigator.mozGetUserMedia || navigator.msGetUserMedia
-	|| navigator.oGetUserMedia;
-
 var QRReader = {};
+
 QRReader.active = false;
 QRReader.webcam = null;
 QRReader.canvas = null;
 QRReader.ctx = null;
 QRReader.decoder = null;
 
-(function() {
-
-	var promisifiedOldGUM = function(constraints, successCallback, errorCallback) {
-
-		// First get ahold of getUserMedia, if present
-		var getUserMedia = (navigator.getUserMedia ||
-				navigator.webkitGetUserMedia ||
-				navigator.mozGetUserMedia ||
-				navigator.msGetUserMedia);
-
-		// Some browsers just don't implement it - return a rejected promise with an error
-		// to keep a consistent interface
-		if(!getUserMedia) {
-			return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
-		}
-
-		// Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
-		return new Promise(function(successCallback, errorCallback) {
-			getUserMedia.call(navigator, constraints, successCallback, errorCallback);
-		});
-
-	}
-
-	// Older browsers might not implement mediaDevices at all, so we set an empty object first
-	if(navigator.mediaDevices === undefined) {
-		navigator.mediaDevices = {};
-	}
-
-	// Some browsers partially implement mediaDevices. We can't just assign an object
-	// with getUserMedia as it would overwrite existing properties.
-	// Here, we will just add the getUserMedia property if it's missing.
-	if(navigator.mediaDevices.getUserMedia === undefined) {
-		navigator.mediaDevices.getUserMedia = promisifiedOldGUM;
-	}
-
-})();
-
-
-/**
- * \brief QRReader Initialization
- * Call this as soon as the document has finished loading.
- *
- * \param webcam_selector selector for the webcam video tag
- */
-QRReader.init = function (webcam_selector, baseurl) {
-	baseurl = typeof baseurl !== "undefined" ? baseurl : "";
+QRReader.init = function () {
+	var baseurl = "";
+	var streaming = false;
 
 	// Init Webcam + Canvas
-	QRReader.webcam = document.querySelector(webcam_selector);
+	QRReader.webcam = document.querySelector("video");
 	QRReader.canvas = document.createElement("canvas");
 	QRReader.ctx = QRReader.canvas.getContext("2d");
-	var streaming = false;
 	QRReader.decoder = new Worker(baseurl + "decoder.min.js");
 
 	// Resize webcam according to input
@@ -72,12 +25,10 @@ QRReader.init = function (webcam_selector, baseurl) {
 		}
 	}, false);
 
-	// Start capturing video only
 	function startCapture(constraints) {
-		// Start video capturing
 		navigator.mediaDevices.getUserMedia(constraints)
 			.then(function (stream) {
-				QRReader.webcam.src = window.URL.createObjectURL(stream);
+				QRReader.webcam.srcObject = stream;
 			})
 			.catch(function(err) {
 				showErrorMsg();
@@ -90,56 +41,50 @@ QRReader.init = function (webcam_selector, baseurl) {
 		sendToastNotification('Unable to open the camera, provide permission to access the camera', 5000);
 	}
 
-	// Firefox lets users choose their camera, so no need to search for an environment
-	// facing camera
-	if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1)
-		startCapture({ video: true });
-	else {
-		navigator.mediaDevices.enumerateDevices()
-			.then(function (devices) {
-				var device = devices.filter(function(device) {
-		      console.log(device.kind + " : " + device.label + " id = " + device.deviceId);
-					var deviceLabel = device.label.split(',')[1];
-					if (device.kind == "videoinput") {
-						return device;
-					}
-		    });
-
-				console.log("Found video device : ", device);
-
-				if (device.length > 1) {
-					var constraints = {
-						video: {
-							mandatory: {
-								sourceId: device[1].deviceId ? device[1].deviceId : null
-							}
-						},
-						audio: false
-					};
-
-					startCapture(constraints);
+	navigator.mediaDevices.enumerateDevices()
+		.then(function (devices) {
+			var device = devices.filter(function(device) {
+	      console.log(device.kind + " : " + device.label + " id = " + device.deviceId);
+				var deviceLabel = device.label.split(',')[1];
+				if (device.kind == "videoinput") {
+					return device;
 				}
-				else if (device.length) {
-					var constraints = {
-						video: {
-							mandatory: {
-								sourceId: device[0].deviceId ? device[0].deviceId : null
-							}
-						},
-						audio: false
-					};
+	    });
 
-					startCapture(constraints);
-				}
-				else {
-					startCapture({video:true});
-				}
-			})
-			.catch(function (error) {
-				showErrorMsg();
-				console.error("Error occurred : ", error);
-			});
-	}
+			console.log("Found video device : ", device);
+
+			if (device.length > 1) {
+				var constraints = {
+					video: {
+						mandatory: {
+							sourceId: device[1].deviceId ? device[1].deviceId : null
+						}
+					},
+					audio: false
+				};
+
+				startCapture(constraints);
+			}
+			else if (device.length) {
+				var constraints = {
+					video: {
+						mandatory: {
+							sourceId: device[0].deviceId ? device[0].deviceId : null
+						}
+					},
+					audio: false
+				};
+
+				startCapture(constraints);
+			}
+			else {
+				startCapture({video:true});
+			}
+		})
+		.catch(function (error) {
+			showErrorMsg();
+			console.error("Error occurred : ", error);
+		});
 }
 
 /**

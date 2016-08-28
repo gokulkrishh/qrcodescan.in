@@ -9,11 +9,10 @@ var filesToCache = [
   '/css/styles.css',
   '/js/app.js',
   '/main.js',
+  '/manifest.json',
+  '/images/touch/android-chrome-144x144.png',
   '/images/touch/android-chrome-192x192.png',
-  '/images/touch/favicon-96x96.png',
-  '/images/touch/favicon-194x194.png',
-  'https://fonts.googleapis.com/css?family=Material+Icons',
-  'https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,medium&amp;lang=en'
+  'https://fonts.googleapis.com/css?family=Material+Icons'
 ];
 
 self.oninstall = function(event) {
@@ -22,27 +21,14 @@ self.oninstall = function(event) {
       return cache.addAll(filesToCache)
         .then(function (response) {
           console.log('Files are cached successfully.');
-          return response;
+          return self.skipWaiting();
         })
     })
   );
 };
 
 self.onactivate = function(event) {
-  var currentCacheName = CACHE_NAME + '-v' + CACHE_VERSION;
-  caches.keys().then(function(cacheNames) {
-    return Promise.all(
-      cacheNames.map(function(cacheName) {
-        if (cacheName.indexOf(CACHE_NAME) == -1) {
-          return;
-        }
-
-        if (cacheName != currentCacheName) {
-          return caches.delete(cacheName);
-        }
-      })
-    );
-  });
+  return self.clients.claim();
 };
 
 self.onfetch = function(event) {
