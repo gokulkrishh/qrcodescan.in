@@ -31,8 +31,8 @@ QRReader.init = function () {
 				QRReader.webcam.srcObject = stream;
 			})
 			.catch(function(err) {
+				console.log("Error occurred ", err);
 				showErrorMsg();
-				console.log("Error in navigator.getUserMedia: ", err);
 			});
 	}
 

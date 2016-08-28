@@ -16,13 +16,6 @@ function sendToastNotification(msg, timer, actionText, actionHandler) {
 	}
 }
 
-//Prevent prompt from asking
-// window.addEventListener('beforeinstallprompt', function(e) {
-//   console.log('beforeinstallprompt Event fired');
-//   e.preventDefault();
-//   return false;
-// });
-
 if ('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('../sw.js', { scope: '/' }).then(function(reg) {
 		if (reg.installing) {

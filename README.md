@@ -2,7 +2,7 @@
 
 *A progressive web application*
 
-#[Link](https://qrcodescan.in)
+#[Live](https://qrcodescan.in)
 
 ## Features
 
@@ -13,6 +13,8 @@
   - Fully responsive
 
   - App shell architecture using [material design lite](https://www.getmdl.io/)
+
+  - Supported browser - Google Chrome, Firefox, Opera (Both Desktop & Mobile)
 
 ## Installation
 
@@ -29,7 +31,7 @@
 
 3. Run the project
   ```bash
-  gulp build
+  gulp
   ```
 
 ### Contributions

@@ -1,7 +1,7 @@
 require('serviceworker-cache-polyfill');
 
 var CACHE_NAME = 'static-cache';
-var CACHE_VERSION = 1;
+var CACHE_VERSION = 2;
 
 var filesToCache = [
   '/',
