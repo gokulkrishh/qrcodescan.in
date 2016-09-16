@@ -35,7 +35,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "start": "node server.js",
-    "build": "gulp clean && gulp"
+    "start": "gulp clean && gulp",
+    "deploy": "bash deploy.sh"
   }
 }

@@ -68,7 +68,7 @@ gulp.task('copy:images', () => {
 gulp.task('copy:others', () => {
   console.log('Coping other files...');
 
-	return gulp.src(['app/manifest.json'])
+	return gulp.src(['app/manifest.json', 'CNAME', 'robots.txt'])
 		.pipe(gulp.dest('dist'));
 });
 
