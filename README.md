@@ -29,15 +29,18 @@
   ```
 
 2. Install dependencies
+
   ```bash
   npm install
   ```
 
 3. Run
+
   ```bash
   npm run start
   ```
-4. Deploy in github pages
+4. Deploy
+
   ```bash
   npm run deploy
   ```

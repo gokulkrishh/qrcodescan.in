@@ -44,14 +44,11 @@ QRReader.init = function () {
 	navigator.mediaDevices.enumerateDevices()
 		.then(function (devices) {
 			var device = devices.filter(function(device) {
-	      console.log(device.kind + " : " + device.label + " id = " + device.deviceId);
 				var deviceLabel = device.label.split(',')[1];
 				if (device.kind == "videoinput") {
 					return device;
 				}
 	    });
-
-			console.log("Found video device : ", device);
 
 			if (device.length > 1) {
 				var constraints = {

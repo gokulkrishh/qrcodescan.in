@@ -166,4 +166,4 @@ gulp.task('watch', function () {
   OTHERS.once('update', log);
 });
 
-gulp.task('default',  ['clean', 'copy:html', 'copy:sass', 'copy:images', 'copy:js', 'browserify', 'copy:others', 'browserSync', 'watch']);
+gulp.task('default', ['clean', 'copy:html', 'copy:sass', 'copy:images', 'copy:js', 'browserify', 'copy:others', 'browserSync', 'watch']);
