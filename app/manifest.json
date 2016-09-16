@@ -1,6 +1,5 @@
-
 {
-  "short_name": "QR Code Scan",
+  "short_name": "QR Scanner",
   "name": "QR Code Scanner",
   "description": "A progressive web app for QR code scanner",
   "display": "standalone",

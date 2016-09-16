@@ -34,3 +34,5 @@ node_modules
 
 # Build directory
 .DS_Store
+
+dist
