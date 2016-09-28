@@ -2,7 +2,7 @@
 
 # [QR Code Scanner](https://qrcodescan.in)
 
-*A progressive web application*
+*A progressive web application.*
 
 ### [Live](https://qrcodescan.in)
 
@@ -10,11 +10,11 @@
 
   - Served via https - Using [cloudflare free ssl](https://www.cloudflare.com/ssl/)
 
-  - Works offline
+  - Works offline.
 
-  - Add to home screen, Splash screen
+  - Add to home screen, Splash screen.
 
-  - Fully responsive
+  - Fully responsive.
 
   - App shell architecture - [material design lite](https://www.getmdl.io/)
 
@@ -25,10 +25,10 @@
 1. Clone this repo
 
   ```bash
-    git clone https://github.com/code-kotis/barcode-scanner
+  git clone https://github.com/code-kotis/barcode-scanner
   ```
 
-2. Install dependencies
+2. Installation
 
   ```bash
   npm install
