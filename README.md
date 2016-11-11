@@ -2,23 +2,23 @@
 
 # [QR Code Scanner](https://qrcodescan.in)
 
-*A progressive web application.*
+*QRCode Scanner - a simple, fast and useful progressive web application*
 
 ### [Live](https://qrcodescan.in)
 
 ## Features
 
-  - Served via https - Using [cloudflare free ssl](https://www.cloudflare.com/ssl/)
-
   - Works offline.
+
+  - Secure via https using [cloudflare free ssl](https://www.cloudflare.com/ssl/)
 
   - Add to home screen, Splash screen.
 
-  - Fully responsive.
+  - Fully Responsive.
 
-  - App shell architecture - [material design lite](https://www.getmdl.io/)
+  - App Shell Architecture - [material design lite](https://www.getmdl.io/)
 
-  - Supported browser - Google Chrome, Firefox, Opera (Both Desktop & Mobile)
+  - Supported Browser - Google Chrome, Firefox, Opera **(Both Desktop & Mobile)** and now supports iOS as well.
 
 ## Installation
 
