@@ -39,7 +39,14 @@
   ```bash
   npm run start
   ```
-4. Deploy
+
+4. Build
+
+  ```bash
+  npm run build
+  ```
+
+5. Deploy
 
   ```bash
   npm run deploy
