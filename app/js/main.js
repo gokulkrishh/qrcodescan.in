@@ -51,7 +51,7 @@ window.addEventListener("DOMContentLoaded", () => {
     focusIcon.style.display = 'block';
     //Fab btn to scan
     scanBtnElement.addEventListener('click',  () => {
-      snackbar.show('Loading picture please wait...', 3000);
+      snackbar.show('Scanning please wait...', 3000);
       scanningEle.style.display = 'block';
       scan();
     });
