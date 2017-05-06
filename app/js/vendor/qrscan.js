@@ -103,7 +103,9 @@ QRReader.init = () => {
 
 	function showErrorMsg() {
 		document.querySelector('.custom-btn').style.display = "none"; //Hide scan button, if error
-		snackbar.show('Unable to open the camera, provide permission to access the camera', 5000);
+		document.querySelector('.app__overlay').style.display = "none";
+		document.querySelector('.app__header-icon svg').style.fill = '#212121';
+		snackbar.show('Unable to open the camera, provide permission to access the camera', 10000);
 	}
 }
 
@@ -114,12 +116,12 @@ QRReader.init = () => {
  * \param A function(scan_result)
  */
 QRReader.scan = function (callback) {
-	QRReader.active = true
+	QRReader.active = true;
 	QRReader.setCanvas();
 	function onDecoderMessage(event) {
 		if (event.data.length > 0) {
 			var qrid = event.data[0][2];
-			QRReader.active = false
+			QRReader.active = false;
 			callback(qrid);
 		}
 		setTimeout(newDecoderFrame, 0);

@@ -14,21 +14,27 @@ window.addEventListener("DOMContentLoaded", () => {
   var copiedText = null;
   var scanBtnElement = document.querySelector('.custom-btn');
   var dialogElement = document.querySelector('.app__dialog');
+  var dialogOverlayElement = document.querySelector('.app__dialog-overlay');
   var dialogOpenBtnElement = document.querySelector('.app__dialog-open');
   var dialogCloseBtnElement = document.querySelector('.app__dialog-close');
+  var cameraIcon = document.querySelector('.camera__icon');
+  var focusIcon = document.querySelector('.focus__icon');
   var scanningEle = document.querySelector('.custom-scanner');
   var textBoxEle = document.querySelector('#result');
-  var menuIconElement = document.querySelector('.app__header-icon');
-  var menuElement = document.querySelector('.menu');
-  var menuOverlayElement = document.querySelector('.menu__overlay');
-  var frame = document.createElement('img');
-  frame.src = '';
-  frame.id = 'frame';
+  var helpText = document.querySelector('.app__help-text');
+  var infoSvg = document.querySelector('.app__header-icon svg');
+  window.appOverlay = document.querySelector('.app__overlay');
+  var frame = null;
   
-  //Menu click event
-  menuIconElement.addEventListener('click', showMenu, false);
-  menuOverlayElement.addEventListener('click', hideMenu, false);
+  function createFrame() {
+    frame = document.createElement('img');
+    frame.src = '';
+    frame.id = 'frame';
+  }
 
+  // Set camera overlay size
+  setCameraOverlay();
+  
   //Dialog close btn event
   dialogCloseBtnElement.addEventListener('click', hideDialog, false);
   dialogOpenBtnElement.addEventListener('click', openInBrowser, false);
@@ -40,26 +46,19 @@ window.addEventListener("DOMContentLoaded", () => {
     copiedText = null;
   }
 
-  //To show menu
-  function showMenu() {
-    menuElement.classList.add('menu--show');
-    menuOverlayElement.classList.add('menu__overlay--show');
-  }
-
-  //To hide menu
-  function hideMenu() {
-    menuElement.classList.remove('menu--show');
-    menuOverlayElement.classList.remove('menu__overlay--show');
-  }
-
   //Add scan funz to fab button, if its other iOS
   if (!window.iOS) {
+    focusIcon.style.display = 'block';
     //Fab btn to scan
     scanBtnElement.addEventListener('click',  () => {
-      snackbar.show('Scanning please wait...', 2000);
+      snackbar.show('Loading picture please wait...', 3000);
       scanningEle.style.display = 'block';
       scan();
     });
+  }
+  else if (window.iOS) {
+    cameraIcon.style.display = 'block';
+    createFrame();
   }
 
   //Scan
@@ -73,6 +72,7 @@ window.addEventListener("DOMContentLoaded", () => {
         dialogOpenBtnElement.style.display = 'inline-block';
       }
       dialogElement.classList.remove('app__dialog--hide');
+      dialogOverlayElement.classList.remove('app__dialog--hide');
     });
   }
 
@@ -80,8 +80,14 @@ window.addEventListener("DOMContentLoaded", () => {
   function hideDialog() {
     copiedText = null;
     textBoxEle.value = "";
-    frame.src = "";
+
+    if (window.iOS) {
+      frame.src = "";
+      frame.className = "";
+    }
+
     dialogElement.classList.add('app__dialog--hide');
+    dialogOverlayElement.classList.add('app__dialog--hide');
   }
 
   //If its iOS, then remove the video element and camera element.
@@ -93,43 +99,41 @@ window.addEventListener("DOMContentLoaded", () => {
     camera.setAttribute('capture', 'camera');
     camera.id = 'camera';
 
-    var iconElement = document.createElement('i');
-    iconElement.className = 'material-icons custom-fab-icon';
-    iconElement.textContent = 'camera_enhance';
     
-    var noSupportText = document.createElement('h2');
-    noSupportText.className = "no-support";
-    noSupportText.textContent = "Press the camera icon below."
+    helpText.textContent = 'Press the below icon to take or load picture.'
+    helpText.style.color = '#212121';
+    helpText.style.bottom = '-60px';
+    infoSvg.style.fill = '#212121';
+
+    window.appOverlay.style.borderStyle = '';
 
     //Add the camera and img element to DOM
     var pageContentElement = document.querySelector('.app__layout-content');
-    var fabElement = document.querySelector('.custom-btn');
-    var fabIconElement = document.querySelector('.custom-fab-icon');
-
     pageContentElement.appendChild(camera);
     pageContentElement.appendChild(frame);
-    pageContentElement.appendChild(noSupportText);    
-
-    fabElement.removeChild(fabIconElement);
-    fabElement.appendChild(iconElement);
-
+    
     //On camera change
     camera.addEventListener('change', (event) => {
       if (event.target && event.target.files.length > 0) {
+        frame.className = 'app__overlay';
         frame.src = URL.createObjectURL(event.target.files[0]);
-        snackbar.show('Scanning please wait...', 2000);
+        snackbar.show('Scanning please wait...', 3000);
         scanningEle.style.display = 'block';
         scan();
       }
     });
 
     //Click of camera fab icon
-    fabElement.addEventListener('click', () => {
+    scanBtnElement.addEventListener('click', () => {
       scanningEle.style.display = 'none';
       document.querySelector("#camera").click();
     });
   }
 });
+
+function setCameraOverlay() {
+  window.appOverlay.style.borderStyle = 'solid';
+}
 
 //Initializing qr scanner
 window.addEventListener('load', (event) => {

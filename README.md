@@ -8,15 +8,15 @@
 
 ## Features
 
+  - App Shell.
+  
+  - Secure via https using [cloudflare free ssl](https://www.cloudflare.com/ssl/)
+  
   - Works offline.
 
-  - Secure via https using [cloudflare free ssl](https://www.cloudflare.com/ssl/)
-
-  - Add to home screen, Splash screen.
-
   - Fully Responsive.
-
-  - App Shell Architecture - [material design lite](https://www.getmdl.io/)
+  
+  - Add to home screen, Splash screen.
 
   - Supported Browser - Google Chrome, Firefox, Opera **(Both Desktop & Mobile)** and now supports iOS as well.
 

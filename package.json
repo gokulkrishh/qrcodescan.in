@@ -1,6 +1,6 @@
 {
   "name": "barcodeScanner",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "engines": {
     "node": "4.1.1"
   },
@@ -28,6 +28,6 @@
   "scripts": {
     "start": "webpack-dev-server --hot --inline --open",
     "deploy": "npm run build && bash deploy.sh",
-    "build": "NODE_ENV=production webpack -p --config webpack.config.js && uglifyjs ./dist/decoder.min.js -c -m -o ./dist/decoder.min.js"
+    "build": "NODE_ENV=production webpack -p --config webpack.config.js"
   }
 }

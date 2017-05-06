@@ -8,58 +8,44 @@
     <meta name=viewport content="width=device-width, initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="QR Scanner"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="#607d8b">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#212121">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="QR Scanner"/>
-    <meta name="msapplication-TileColor" content="#607d8b"/>
+    <meta name="msapplication-TileColor" content="#212121"/>
     <meta name="msapplication-TileImage" content="/images/touch/mstile-144x144.png"/>
-    <meta name="theme-color" content="#607d8b"/>
+    <meta name="theme-color" content="#212121"/>
     <link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.jpg"/>
     <link rel="icon" type="image/png" href="/images/touch/favicon-32x32.png" sizes="32x32"/>
     <link rel="icon" type="image/png" href="/images/touch/favicon-16x16.png" sizes="16x16"/>
     <link rel="shortcut icon" href="/images/touch/favicon.ico">
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
   </head>
   <body>
     <div class="app__layout">
       <!-- Header -->
       <header class="app__header">
-        <span class="app__header-icon">
-          <svg class="menu__icon no--select" width="25px" height="25px" viewBox="0 0 48 48" fill="#fff">
-            <path d="M6 36h36v-4H6v4zm0-10h36v-4H6v4zm0-14v4h36v-4H6z"></path>
+        <span class="app__header-icon" onclick="window.open('https://github.com/code-kotis/barcode-scanner', '_blank', 'toolbar=0,location=0,menubar=0');">
+          <svg fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"/>
           </svg>
         </span>
-        <span class="app__header-title">QR Code Scanner</span>
       </header>
       
-      <!-- Menu -->
-      <div class="menu">
-        <span class="menu__title"></span>
-        <ul class="menu__list">
-          <li>
-            <a target="_blank" rel="noopener" href="https://github.com/orgs/code-kotis/people">Author</a>
-          </li>
-          <li>
-            <a target="_blank" rel="noopener" href="https://github.com/code-kotis/barcode-scanner">Source</a></li>
-          <li>
-            <a target="_blank" rel="noopener" href="https://github.com/code-kotis/barcode-scanner/issues/new">Bug report</a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Menu Overlay -->
-      <div class="menu__overlay"></div>
-
       <main class="app__layout-content">
         <video autoplay></video>
         
-        <!-- Scanner animation -->
-        <div class="custom-scanner"></div>
-        
         <!-- Scan button -->
         <button class="custom-btn">
-          <i class="material-icons custom-fab-icon">center_focus_strong</i>
+          <svg class="focus__icon" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm-7 7H3v4c0 1.1.9 2 2 2h4v-2H5v-4zM5 5h4V3H5c-1.1 0-2 .9-2 2v4h2V5zm14-2h-4v2h4v4h2V5c0-1.1-.9-2-2-2zm0 16h-4v2h4c1.1 0 2-.9 2-2v-4h-2v4z"/>
+          </svg>
+          <svg class="camera__icon" fill="#FFFFFF" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 3L7.17 5H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2h-3.17L15 3H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+            <path d="M0 0h24v24H0V0z" fill="none"/>
+            <path d="M12 17l1.25-2.75L16 13l-2.75-1.25L12 9l-1.25 2.75L8 13l2.75 1.25z"/>
+          </svg>
         </button>
         
         <!-- Dialog  -->
@@ -74,9 +60,17 @@
           </div>
         </div>
 
+        <div class="app__dialog-overlay app__dialog--hide"></div>
+
         <!-- Snackbar -->
         <div class="app__snackbar"></div>
       </main>
+    </div>
+    <div class="app__overlay">
+      <div class="app__overlay-frame"></div>
+      <!-- Scanner animation -->
+      <div class="custom-scanner"></div>
+      <div class="app__help-text">Point your camera at a QR Code</div>
     </div>
     
     <script>
