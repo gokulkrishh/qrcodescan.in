@@ -31,9 +31,6 @@ window.addEventListener("DOMContentLoaded", () => {
     frame.src = '';
     frame.id = 'frame';
   }
-
-  // Set camera overlay size
-  setCameraOverlay();
   
   //Dialog close btn event
   dialogCloseBtnElement.addEventListener('click', hideDialog, false);
@@ -111,6 +108,10 @@ window.addEventListener("DOMContentLoaded", () => {
     var pageContentElement = document.querySelector('.app__layout-content');
     pageContentElement.appendChild(camera);
     pageContentElement.appendChild(frame);
+
+    
+    // Set camera overlay size
+    setCameraOverlay();
     
     //On camera change
     camera.addEventListener('change', (event) => {
@@ -138,6 +139,8 @@ function setCameraOverlay() {
 //Initializing qr scanner
 window.addEventListener('load', (event) => {
   QRReader.init(); //To initialize QR Scanner
+  // Set camera overlay size
+  setCameraOverlay();
 });
 
 //If service worker is installed, show offline usage notification
