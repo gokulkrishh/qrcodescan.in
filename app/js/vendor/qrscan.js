@@ -102,7 +102,6 @@ QRReader.init = () => {
 	}
 
 	function showErrorMsg() {
-		document.querySelector('.custom-btn').style.display = "none"; //Hide scan button, if error
 		document.querySelector('.app__overlay').style.display = "none";
 		document.querySelector('.app__header-icon svg').style.fill = '#212121';
 		snackbar.show('Unable to open the camera, provide permission to access the camera', 10000);

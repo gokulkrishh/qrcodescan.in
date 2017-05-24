@@ -6,21 +6,16 @@
   "orientation": "portrait",
   "icons": [
 	{
-		"src": "/images/touch/android-chrome-144x144.png",
-		"sizes": "144x144",
+		"src": "/images/touch/android-chrome-192x192.png",
+		"sizes": "192x192",
 		"type": "image/png"
 	},
   {
-    "src": "/images/touch/apple-touch-icon-180x180.png",
-    "sizes": "180x180",
-    "type": "image/png"
-  },
-  {
-    "src": "/images/touch/android-chrome-192x192.png",
-    "sizes": "192x192",
+    "src": "/images/touch/android-chrome-512x512.png",
+    "sizes": "512x512",
     "type": "image/png"
   }],
-  "start_url": "/",
-  "theme_color": "#212121",
+  "start_url": "/index.html?utm_source=homescreen",
+  "theme_color": "#e4e4e4",
   "background_color": "#fff"
 }

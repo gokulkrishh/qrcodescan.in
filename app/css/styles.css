@@ -31,8 +31,8 @@ body {
 }
 
 .app__header-icon {
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -323,60 +323,26 @@ video {
   bottom: 0;
   right: 0;
   left: 0;
-  border-color: rgba(0, 0, 0, 0.33);
+  border-color: #ffffff;
+  border-width: 2px;
   transition: all 200ms ease-in;
-  width: 290px;
-  height: 290px;
+  width: 360px;
+  height: 360px;
   margin: auto;
+  border-radius: 2px;
 }
 
-.app__overlay::before,
-.app__overlay-frame::before,
-.app__overlay-frame::after,
-.app__overlay::after {
-  border: 2px solid #ffffff;
-  content: " ";
-  position: absolute;
-  width: 100px;
-  height: 100px;
-}
-
-.app__overlay-frame::before {
-  border-left: 0;
-  border-bottom: 0;
-  top: 0;
-  right: 0;
-}
-
-.app__overlay::before {
-  border-right: 0;
-  border-bottom: 0;
-  top: 0;
-  left: 0;
-}
-
-.app__overlay-frame::after {
-  border-top: 0;
-  border-right: 0;
-  left: 0;
-  bottom: 0;
-}
-
-.app__overlay::after {
-  border-top: 0;
-  border-left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.app__help-text {
+.app__help-text,
+.app__select-photos {
   color: #fff;
   position: absolute;
-  bottom: -50px;
-  font-size: 19px;
+  bottom: -70px;
+  font-size: 18px;
   left: 0;
   right: 0;
   text-align: center;
+  user-select: none;
+  display: none;
 }
 
 .app__dialog-overlay {
@@ -394,4 +360,22 @@ video {
   position: relative;
   left: 10px;
   display: none;
+}
+
+.app__select-photos {
+  font-size: 19px;
+  font-weight: 500;
+  width: 250px;
+  height: 35px;
+  line-height: 35px;
+  margin: 0 auto;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  text-transform: uppercase;
+}
+
+.app__select-photos:active {
+  opacity: 0.9;
+  transform: scale(0.98);
 }

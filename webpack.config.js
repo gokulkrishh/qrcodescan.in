@@ -15,7 +15,6 @@ const config = {
   },
   devServer: {
     compress: true,
-    open: true,
     contentBase: __dirname + '/app'
   },
   
@@ -74,8 +73,8 @@ const config = {
 }
 
 // Setting plugins for production
-if (process.env.NODE_ENV === "production") {
-  config.devtool = "";
+if (process.env.NODE_ENV === 'production') {
+  config.devtool = '';
   config.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compress: {
