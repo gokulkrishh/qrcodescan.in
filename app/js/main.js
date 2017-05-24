@@ -43,9 +43,7 @@ window.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => { 
       setCameraOverlay();
       if (!window.iOS) {
-        videoElement.addEventListener("play", function () { 
-          scan();
-        });
+        scan();
       }
     }, 1000);
   });
