@@ -88,7 +88,7 @@ if (process.env.NODE_ENV === 'production') {
       AppCache: false,
       publicPath: '/',
       excludes: ['*.txt', '*.svg', 'CNAME', '**/.DS_Store', 'images/*.*', 'images/touch/*.*', 'images/touch/*.*', '**/*.map'],
-      externals: ['images/touch/favicon.ico', 'images/touch/apple-touch-icon.png', 'images/touch/android-chrome-512x512.png', 'images/touch/android-chrome-192x192.png']
+      externals: ['images/touch/favicon.ico', 'images/touch/apple-touch-icon.jpg', 'images/touch/android-chrome-512x512.png', 'images/touch/android-chrome-192x192.png']
     })
   );
   config.plugins.push(
