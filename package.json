@@ -7,7 +7,8 @@
 		"build": "cross-env NODE_ENV=production webpack-cli --mode=production --config webpack.config.js",
 		"stats": "cross-env NODE_ENV=production webpack-cli --mode=production --profile --json > stats.json",
 		"precommit": "lint-staged",
-		"pretty": "prettier --write 'app/**/*.js'"
+		"pretty": "prettier --write 'app/**/*.js'",
+		"deploy": "npm run build && gh-pages -d public -b gh-pages"
 	},
 	"lint-staged": {
 		"*.{js,css}": [
@@ -22,6 +23,7 @@
 		"is-url": "^1.2.4"
 	},
 	"devDependencies": {
+		"gh-pages": "^3.1.0",
 		"clean-webpack-plugin": "^0.1.19",
 		"copy-webpack-plugin": "^4.5.3",
 		"cross-env": "^5.2.0",
