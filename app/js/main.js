@@ -104,10 +104,6 @@ window.addEventListener('DOMContentLoaded', () => {
       }
       dialogElement.classList.remove('app__dialog--hide');
       dialogOverlayElement.classList.remove('app__dialog--hide');
-      const frame = document.querySelector('#frame');
-      if (forSelectedPhotos && frame) {
-        frame.remove();
-      }
     }, forSelectedPhotos);
   }
 
