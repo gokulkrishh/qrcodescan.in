@@ -1,3 +1,5 @@
+if(querySelector in document) {
+  // Prevents browsers without support from running script for cosmetic purposes
 var snackbar = {};
 var snackBarElement = document.querySelector('.app__snackbar');
 var snackbarMsg = null;
@@ -22,3 +24,4 @@ snackbar.show = (msg, options = 4000) => {
 };
 
 exports.snackbar = snackbar;
+}
