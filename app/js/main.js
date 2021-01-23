@@ -1,3 +1,4 @@
+if document in window {
 import QRReader from './vendor/qrscan.js';
 import { snackbar } from './snackbar.js';
 import { isURL, hasProtocolInUrl } from './utils';
@@ -154,3 +155,4 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+}
