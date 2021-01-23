@@ -1,7 +1,8 @@
 import QRReader from './vendor/qrscan.js';
 import { snackbar } from './snackbar.js';
-import styles from '../css/styles.css';
-import isURL from 'is-url';
+import { isURL, hasProtocolInUrl } from './utils';
+
+import '../css/styles.css';
 
 //If service worker is installed, show offline usage notification
 if ('serviceWorker' in navigator) {
@@ -73,6 +74,11 @@ window.addEventListener('DOMContentLoaded', () => {
   //To open result in browser
   function openInBrowser() {
     console.log('Result: ', copiedText);
+
+    if (!hasProtocolInUrl(copiedText)) {
+      copiedText = `//${copiedText}`;
+    }
+
     window.open(copiedText, '_blank', 'toolbar=0,location=0,menubar=0');
     copiedText = null;
     hideDialog();
@@ -99,7 +105,9 @@ window.addEventListener('DOMContentLoaded', () => {
       dialogElement.classList.remove('app__dialog--hide');
       dialogOverlayElement.classList.remove('app__dialog--hide');
       const frame = document.querySelector('#frame');
-      // if (forSelectedPhotos && frame) frame.remove();
+      if (forSelectedPhotos && frame) {
+        frame.remove();
+      }
     }, forSelectedPhotos);
   }
 
@@ -115,7 +123,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     dialogElement.classList.add('app__dialog--hide');
     dialogOverlayElement.classList.add('app__dialog--hide');
-    scan();
   }
 
   function selectFromPhoto() {
