@@ -1,6 +1,9 @@
 import QRReader from './vendor/qrscan.js';
 import { snackbar } from './snackbar.js';
 import { isURL, hasProtocolInUrl } from './utils';
+import * as googleAnalytics from 'workbox-google-analytics';
+
+googleAnalytics.initialize();
 
 import '../css/styles.css';
 

@@ -24,11 +24,7 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css'
     }),
-    new WorkboxPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true,
-      runtimeCaching: [{ urlPattern: new RegExp('/'), handler: 'staleWhileRevalidate' }]
-    }),
+    new WorkboxPlugin.GenerateSW(),
     new HtmlWebpackPlugin({
       template: './app/index.html',
       minify: {
