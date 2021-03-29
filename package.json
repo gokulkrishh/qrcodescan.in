@@ -39,8 +39,5 @@
 		"webpack-cli": "^3.1.2",
 		"webpack-dev-server": "^3.1.9",
 		"workbox-webpack-plugin": "^6.1.2"
-	},
-	"dependencies": {
-		"workbox-google-analytics": "^6.1.2"
 	}
 }
