@@ -1,7 +1,7 @@
 {
   "short_name": "QR Scanner",
   "name": "QR Code Scanner",
-  "description": "QR code scanner progressive web application",
+  "description": "Easily scan a QR code via this scanner. It is simple, fast progressive web application which works offline.",
   "display": "standalone",
   "orientation": "portrait",
   "icons": [
@@ -17,5 +17,22 @@
   }],
   "start_url": "/index.html?utm_source=homescreen",
   "theme_color": "#e4e4e4",
-  "background_color": "#fff"
+  "background_color": "#fff",
+  "screenshots": [
+    {
+      "src": "/images/screenshots/screenshot1.png",
+      "type": "image/png",
+      "sizes": "586x1041"
+    },
+    {
+      "src": "/images/screenshots/screenshot2.png",
+      "type": "image/png",
+      "sizes": "586x1041"
+    },
+    {
+      "src": "/images/screenshots/screenshot3.png",
+      "type": "image/png",
+      "sizes": "586x1041"
+    }
+  ]
 }
