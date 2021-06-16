@@ -1,12 +1,14 @@
 {
-	"name": "qr-code-scanner",
-	"description": "QR Code Scanner is the fastest and most user-friendly web application.",
+	"name": "qrcodescan.in",
+	"description": "qrcodescan.in is the fastest and most user-friendly web application.",
 	"version": "1.0.0",
 	"scripts": {
 		"build": "rollup -c",
-    "start": "rollup -c -w",
+		"watch": "rollup -c -w",
+		"start": "npm-run-all --parallel serve watch",
+		"serve": "serve public",
 		"precommit": "lint-staged",
-		"pretty": "prettier --write 'app/**/*.js'",
+		"pretty": "prettier --write 'public/**/*.svg'",
 		"deploy": "npm run build && gh-pages -d dist -b gh-pages"
 	},
 	"lint-staged": {
@@ -19,14 +21,15 @@
 		"node": ">=14.17.1"
 	},
 	"devDependencies": {
-		"cross-env": "^7.0.3",
 		"gh-pages": "^3.2.1",
-		"html-webpack-plugin": "^5.3.1",
 		"husky": "^6.0.0",
 		"lint-staged": "^11.0.0",
-		"prettier": "^2.3.1"
-	},
-	"dependencies": {
-		"rollup": "^2.51.2"
+		"npm-run-all": "^4.1.5",
+		"prettier": "^2.3.1",
+		"rollup": "^2.51.2",
+		"rollup-plugin-styles": "^3.14.1",
+		"rollup-plugin-terser": "^7.0.2",
+		"rollup-plugin-workbox": "^6.1.1",
+		"serve": "^12.0.0"
 	}
 }

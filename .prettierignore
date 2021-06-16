@@ -1,3 +1,2 @@
 *.json
-/dist
-app/decoder.js
+public/decoder.js
