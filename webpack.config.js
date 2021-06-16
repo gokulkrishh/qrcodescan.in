@@ -8,6 +8,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
 
+const isProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
   entry: './app/js/main.js',
   output: {
@@ -24,7 +26,20 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css'
     }),
-    new WorkboxPlugin.GenerateSW(),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+      runtimeCaching: [
+        {
+          urlPattern: isProd ? /https:\/\/qrcodescan.in\// : /http:\/\/localhost:8080\//,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'pages',
+            cacheableResponse: { statuses: [200] }
+          }
+        }
+      ]
+    }),
     new HtmlWebpackPlugin({
       template: './app/index.html',
       minify: {
