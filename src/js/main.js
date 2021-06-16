@@ -10,7 +10,6 @@ if ("serviceWorker" in navigator) {
 		navigator.serviceWorker
 			.register("/sw.js")
 			.then((reg) => {
-				console.log("SW registered: ", reg);
 				if (!localStorage.getItem("offline")) {
 					localStorage.setItem("offline", true);
 					snackbar.show("App is ready for offline usage.", 5000);
