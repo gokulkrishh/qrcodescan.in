@@ -119,6 +119,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     dialogElement.classList.add('app__dialog--hide');
     dialogOverlayElement.classList.add('app__dialog--hide');
+    scan();
   }
 
   function selectFromPhoto() {

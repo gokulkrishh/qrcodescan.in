@@ -29,6 +29,7 @@ module.exports = {
     new WorkboxPlugin.GenerateSW({
       clientsClaim: true,
       skipWaiting: true,
+      exclude: [/sockjs-node/],
       runtimeCaching: [
         {
           urlPattern: isProd ? /https:\/\/qrcodescan.in\// : /http:\/\/localhost:8080\//,
