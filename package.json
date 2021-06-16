@@ -9,7 +9,7 @@
 		"serve": "serve public",
 		"precommit": "lint-staged",
 		"pretty": "prettier --write 'public/**/*.svg'",
-		"deploy": "npm run build && gh-pages -d dist -b gh-pages"
+		"deploy": "npm run build && gh-pages -d public -b gh-pages"
 	},
 	"lint-staged": {
 		"*.{js,css,html}": [

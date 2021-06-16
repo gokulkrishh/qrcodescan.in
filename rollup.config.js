@@ -1,9 +1,11 @@
 import styles from "rollup-plugin-styles";
 import { terser } from "rollup-plugin-terser";
-const { generateSW } = require("rollup-plugin-workbox");
+import { generateSW } from "rollup-plugin-workbox";
 import del from "rollup-plugin-delete";
 
 const isProduction = process.env.NODE_ENV === "production";
+
+const routes = [{ path: "/", name: "Home" }];
 
 export default {
 	input: "src/js/main.js",
