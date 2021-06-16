@@ -3,7 +3,7 @@
 	"description": "qrcodescan.in is the fastest and most user-friendly web application.",
 	"version": "1.0.0",
 	"scripts": {
-		"build": "rollup -c",
+		"build": "NODE_ENV=production rollup -c",
 		"watch": "rollup -c -w",
 		"start": "npm-run-all --parallel serve watch",
 		"serve": "serve public",
