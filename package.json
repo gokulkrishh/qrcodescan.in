@@ -11,7 +11,7 @@
 		"deploy": "npm run build && gh-pages -d dist -b gh-pages -r https://github.com/gokulkrishh/qrcodescan.in"
 	},
 	"lint-staged": {
-		"*.{js,css}": [
+		"*.{js}": [
 			"npm run pretty",
 			"git add"
 		]

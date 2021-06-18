@@ -32,11 +32,11 @@ h4,
 h5,
 h6 {
 	font-size: 100%;
-	font-weight: normal
+	font-weight: normal;
 }
 
 ul {
-	list-style: none
+	list-style: none;
 }
 
 button,
@@ -475,7 +475,6 @@ video {
   background-repeat: no-repeat;
   background-size: 26px;
   background-position: 16px 15px;
-  z-index: 200;
 }
 
 .app__select-photos:active {
