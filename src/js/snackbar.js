@@ -21,4 +21,4 @@ snackbar.show = (msg, options = 4000) => {
   }, options);
 };
 
-exports.snackbar = snackbar;
+export default snackbar;

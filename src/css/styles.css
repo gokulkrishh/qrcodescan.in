@@ -471,10 +471,9 @@ video {
   right: 20px;
   border-radius: 50%;
   background-color: #3F51B5;
-  background-image: url("/images/photo-camera.svg");
-  background-repeat: no-repeat;
-  background-size: 26px;
-  background-position: 16px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .app__select-photos:active {
