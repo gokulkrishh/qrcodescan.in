@@ -6,7 +6,7 @@
 		"build": "NODE_ENV=production rollup -c",
 		"watch": "rollup -c -w",
 		"start": "npm-run-all --parallel serve watch",
-		"serve": "serve public",
+		"serve": "rollup -c && serve public",
 		"precommit": "lint-staged",
 		"pretty": "prettier --write 'src'",
 		"deploy": "npm run build && gh-pages -d dist -b gh-pages -r https://github.com/gokulkrishh/qrcodescan.in"
@@ -28,8 +28,9 @@
 		"npm-run-all": "^4.1.5",
 		"prettier": "^2.3.1",
 		"rollup": "^2.52.1",
+		"rollup-plugin-css-only": "^3.1.0",
 		"rollup-plugin-delete": "^2.0.0",
-		"rollup-plugin-styles": "^3.14.1",
+		"rollup-plugin-sizes": "^1.0.4",
 		"rollup-plugin-terser": "^7.0.2",
 		"rollup-plugin-workbox": "^6.1.1",
 		"serve": "^12.0.0"

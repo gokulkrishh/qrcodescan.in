@@ -1,7 +1,8 @@
 import { terser } from 'rollup-plugin-terser';
-import styles from 'rollup-plugin-styles';
 import del from 'rollup-plugin-delete';
 import { generateSW } from 'rollup-plugin-workbox';
+import sizes from 'rollup-plugin-sizes';
+import css from 'rollup-plugin-css-only';
 
 export default {
 	input: ['src/js/index.js'],
@@ -13,8 +14,8 @@ export default {
 		},
 	],
 	plugins: [
-		del({ targets: ['public/workbox-*.js', 'public/sw.js'] }),
-		styles(),
+		del({ targets: ['public/workbox-*.js', 'public/sw.js', 'public/bundle.js', 'public/bundle.css'] }),
+		css({ output: 'bundle.css' }),
 		terser(),
 		generateSW({
 			swDest: 'public/service-worker.js',
@@ -32,5 +33,6 @@ export default {
 				},
 			],
 		}),
+		sizes(),
 	],
 };
