@@ -1,4 +1,4 @@
-import { snackbar } from '../snackbar.js';
+import snackbar from '../snackbar.js';
 
 var QRReader = {};
 
