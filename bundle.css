@@ -327,12 +327,13 @@ video {
   opacity: 0;
 }
 
+.app__infodialog,
 .app__dialog {
   z-index: 12;
   background-color: #fff;
   width: 290px;
   height: 180px;
-  border-radius: 2px;
+  border-radius: 8px;
   display: flex;
   position: absolute;
   left: 0;
@@ -343,32 +344,59 @@ video {
   box-shadow: 0 9px 46px 8px rgba(0,0,0,.14), 0 11px 15px -7px rgba(0,0,0,.12), 0 24px 38px 3px rgba(0,0,0,.2);
 }
 
-.app__dialog h5 {
-  margin-top: 20px;
-  margin-left: 18px;
-  font-weight: 500;
+.app__infodialog {
+  max-width: 480px;
+  width: 95%;
+  height: 240px;
+}
+
+.app__dialog-content,
+.app__infodialog-content {
+  width: 100%;
+  padding: 15px;
+}
+
+.app__infodialog-subcontent {
+  margin-top: 18px;
+}
+
+.app__infodialog-subcontent a {
+  color: #1b1eb5;
+}
+
+.app__infodialog-subcontent p:not(:first-child) {
+  margin-top: 10px;
+}
+
+.app__dialog-content h1,
+.app__infodialog h1 {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 19px;
 }
 
 .app__dialog input {
   width: 250px;
-  margin: 20px;
   height: 30px;
   border: none;
-  border-bottom: 1px solid rgba(0,0,0,.12);
+  border-bottom: 1px solid rgba(0,0,0,.24);
   outline: none;
   font-size: 15px;
-  margin-top: 25px;
-  color: rgba(0,0,0,.54);
+  color: #1b1eb5;
   font-weight: 500;
 }
 
-.app__dialog-actions {
+.app__dialog-actions,
+.app__infodialog-actions {
   display: block;
   position: absolute;
   bottom: 13px;
   right: 20px;
 }
 
+.app__infodialog-open,
+.app__infodialog-close,
 .app__dialog-open,
 .app__dialog-close {
   border: 0;
@@ -379,17 +407,21 @@ video {
   font-weight: 500;
   outline: none;
   cursor: pointer;
+  margin-right: -15px;
 }
 
 .app__dialog-open {
   display: none;
 }
 
+.app__infodialog-open:active,
+.app__infodialog-close:active,
 .app__dialog-open:active,
 .app__dialog-close:active {
   opacity: 0.9;
 }
 
+.app__infodialog--hide,
 .app__dialog--hide {
   display: none;
 }
@@ -445,7 +477,8 @@ video {
   left: 0;
 }
 
-.app__dialog-overlay {
+.app__dialog-overlay,
+.app__infodialog-overlay {
   position: fixed;
   left: 0;
   right: 0;
@@ -487,4 +520,24 @@ input[type='file'] {
 #frame {
   width: auto;
   height: auto;
+}
+
+.app__version {
+  position: absolute;
+  bottom: 20px;
+  font-size: 12px;
+  color: #737373;
+  margin-top: 15px;
+  display: inline-block;
+
+}
+
+@media screen and (max-width: 480px) {
+  .app__infodialog {
+    width: 90%;
+  }
+
+  .app__infodialog-content {
+    padding: 12px 13px;
+  }
 }
