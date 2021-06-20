@@ -3,7 +3,6 @@ import del from 'rollup-plugin-delete';
 import { generateSW } from 'rollup-plugin-workbox';
 import sizes from 'rollup-plugin-sizes';
 import css from 'rollup-plugin-css-only';
-import livereload from 'rollup-plugin-livereload';
 
 const isProd = process.env.NODE_ENV === 'production';
 
