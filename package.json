@@ -1,7 +1,7 @@
 {
 	"name": "qr-code-scanner",
 	"description": "QR Code Scanner is the fastest and most user-friendly progressive web application.",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"scripts": {
 		"build": "NODE_ENV=production rollup -c",
 		"watch": "rollup -c -w",
