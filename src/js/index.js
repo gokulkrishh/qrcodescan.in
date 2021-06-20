@@ -37,9 +37,16 @@ window.addEventListener('DOMContentLoaded', () => {
 	var dialogCloseBtnElement = document.querySelector('.app__dialog-close');
 	var scanningEle = document.querySelector('.custom-scanner');
 	var textBoxEle = document.querySelector('#result');
+
 	var helpTextEle = document.querySelector('.app__help-text');
 	var infoSvg = document.querySelector('.app__header-icon svg');
 	var videoElement = document.querySelector('video');
+
+	var headerIcon = document.querySelector('.app__header-icon');
+	var infoDialogElement = document.querySelector('.app__infodialog');
+	var infoDialogCloseBtnElement = document.querySelector('.app__infodialog-close');
+	var infoDialogOverlayElement = document.querySelector('.app__infodialog-overlay');
+
 	window.appOverlay = document.querySelector('.app__overlay');
 
 	//Initializing qr scanner
@@ -69,7 +76,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	//Dialog close btn event
 	dialogCloseBtnElement.addEventListener('click', hideDialog, false);
+	infoDialogCloseBtnElement.addEventListener('click', closeInfoDialog, false);
 	dialogOpenBtnElement.addEventListener('click', openInBrowser, false);
+	headerIcon.addEventListener('click', showInfo, false);
 
 	//To open result in browser
 	function openInBrowser() {
@@ -153,5 +162,15 @@ window.addEventListener('DOMContentLoaded', () => {
 				scan(true);
 			}
 		});
+	}
+
+	function showInfo() {
+		infoDialogElement.classList.remove('app__infodialog--hide');
+		infoDialogOverlayElement.classList.remove('app__infodialog--hide');
+	}
+
+	function closeInfoDialog() {
+		infoDialogElement.classList.add('app__infodialog--hide');
+		infoDialogOverlayElement.classList.add('app__infodialog--hide');
 	}
 });
