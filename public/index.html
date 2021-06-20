@@ -26,7 +26,7 @@
     <div class="app__layout">
       <!-- Header -->
       <header class="app__header">
-        <span class="app__header-icon" onclick="window.open('https://github.com/gokulkrishh/qrcodescan.in', '_blank', 'toolbar=0,location=0,menubar=0');">
+        <span class="app__header-icon">
           <svg fill="#FFFFFF" height="27" viewBox="0 0 24 24" width="27" xmlns="http://www.w3.org/2000/svg">
             <path d="M0 0h24v24H0z" fill="none" />
             <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z" />
@@ -37,10 +37,10 @@
       <main class="app__layout-content">
         <video autoplay></video>
 
-        <!-- Dialog  -->
+        <!-- Dialog for result  -->
         <div class="app__dialog app__dialog--hide">
           <div class="app__dialog-content">
-            <h5>QR Code</h5>
+            <h1>QR Code</h1>
             <input type="text" id="result">
           </div>
           <div class="app__dialog-actions">
@@ -50,6 +50,23 @@
         </div>
 
         <div class="app__dialog-overlay app__dialog--hide"></div>
+
+        <!-- Info Dialog  -->
+        <div class="app__infodialog app__infodialog--hide">
+          <div class="app__infodialog-content">
+            <h1>About QR Code Scanner</h1>
+            <p>QR Code Scanner is the fastest and most user-friendly progressive web application.</p>
+            <div class="app__infodialog-subcontent">
+              <p><strong>Author:</strong> <a href="https://github.com/gokulkrishh" rel="noreferrer noopener">Gokulakrishnan Kalaikovan</a></p>
+              <p><strong>Source:</strong> <a href="https://github.com/gokulkrishh/qrcodescan.in" rel="noreferrer noopener">Github</a></p>
+            </div>
+          </div>
+          <div class="app__infodialog-actions">
+            <button type="button" class="app__infodialog-close">Close</button>
+          </div>
+        </div>
+
+        <div class="app__infodialog-overlay app__infodialog--hide"></div>
 
         <!-- Snackbar -->
         <div class="app__snackbar"></div>

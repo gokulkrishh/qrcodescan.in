@@ -1,6 +1,6 @@
 {
 	"name": "qr-code-scanner",
-	"description": "QR Code Scanner is the fastest and most user-friendly web application.",
+	"description": "QR Code Scanner is the fastest and most user-friendly progressive web application.",
 	"version": "1.0.0",
 	"scripts": {
 		"build": "NODE_ENV=production rollup -c",
@@ -30,6 +30,7 @@
 		"rollup": "^2.52.1",
 		"rollup-plugin-css-only": "^3.1.0",
 		"rollup-plugin-delete": "^2.0.0",
+		"rollup-plugin-livereload": "^2.0.0",
 		"rollup-plugin-sizes": "^1.0.4",
 		"rollup-plugin-terser": "^7.0.2",
 		"rollup-plugin-workbox": "^6.1.1",
