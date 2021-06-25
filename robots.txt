@@ -1,5 +1,8 @@
-# www.robotstxt.org/
+User-agent: Googlebot
+Disallow: /nogooglebot/
 
-# Allow crawling of all content
 User-agent: *
-Disallow:
+Allow: /
+
+Sitemap: https://www.qrcodescan.in/sitemap.xml
+Sitemap: http://www.qrcodescan.in/sitemap.xml
