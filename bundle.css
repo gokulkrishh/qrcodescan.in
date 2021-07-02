@@ -216,54 +216,54 @@ video {
 
 @-webkit-keyframes scanner {
   0% {
-    bottom: 100%;
+    bottom: 90%;
   }
   50% {
-    bottom: 0%;
+    bottom: 10%;
   }
   100% {
-    bottom: 100%;
+    bottom: 90%;
   }
 }
 
 @-moz-keyframes scanner {
   0% {
-    bottom: 100%;
+    bottom: 90%;
   }
   50% {
-    bottom: 0%;
+    bottom: 10%;
   }
   100% {
-    bottom: 100%;
+    bottom: 90%;
   }
 }
 
 @-o-keyframes scanner {
   0% {
-    bottom: 100%;
+    bottom: 90%;
   }
   50% {
-    bottom: 0%;
+    bottom: 10%;
   }
   100% {
-    bottom: 100%;
+    bottom: 90%;
   }
 }
 
 @keyframes scanner {
   0% {
-    bottom: 100%;
+    bottom: 90%;
   }
   50% {
-    bottom: 0%;
+    bottom: 10%;
   }
   100% {
-    bottom: 100%;
+    bottom: 90%;
   }
 }
 
 .custom-scanner {
-  width: 100%;
+  width: 270px;
   height: 2px;
   background: #4CAF50;
   position: absolute;
@@ -276,6 +276,9 @@ video {
   animation: scanner 3s infinite linear;
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.4);
   display: none;
+  left: -10px;
+  right: 0;
+  margin: auto;
 }
 
 #camera {
@@ -529,7 +532,12 @@ input[type='file'] {
   color: #737373;
   margin-top: 15px;
   display: inline-block;
+}
 
+.app__scanner-img {
+  z-index: 1;
+  position: relative;
+  display: none;
 }
 
 @media screen and (max-width: 480px) {
