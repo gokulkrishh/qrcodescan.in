@@ -36,6 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	var dialogOpenBtnElement = document.querySelector('.app__dialog-open');
 	var dialogCloseBtnElement = document.querySelector('.app__dialog-close');
 	var scanningEle = document.querySelector('.custom-scanner');
+	var appScanningEle = document.querySelector('.app__scanner-img');
 	var textBoxEle = document.querySelector('#result');
 
 	var helpTextEle = document.querySelector('.app__help-text');
@@ -97,10 +98,12 @@ window.addEventListener('DOMContentLoaded', () => {
 	function scan(forSelectedPhotos = false) {
 		if (window.isMediaStreamAPISupported && !window.noCameraPermission) {
 			scanningEle.style.display = 'block';
+			appScanningEle.style.display = 'block';
 		}
 
 		if (forSelectedPhotos) {
 			scanningEle.style.display = 'block';
+			appScanningEle.style.display = 'block';
 		}
 
 		QRReader.scan((result) => {
@@ -108,6 +111,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			textBoxEle.value = result;
 			textBoxEle.select();
 			scanningEle.style.display = 'none';
+			appScanningEle.style.display = 'none';
 			if (isURL(result)) {
 				dialogOpenBtnElement.style.display = 'inline-block';
 			}
@@ -149,6 +153,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		//Click of camera fab icon
 		selectPhotoBtn.addEventListener('click', () => {
 			scanningEle.style.display = 'none';
+			appScanningEle.style.display = 'none';
 			document.querySelector('#camera').click();
 		});
 
@@ -157,7 +162,10 @@ window.addEventListener('DOMContentLoaded', () => {
 			if (event.target && event.target.files.length > 0) {
 				frame.className = 'app__overlay';
 				frame.src = URL.createObjectURL(event.target.files[0]);
-				if (!window.noCameraPermission) scanningEle.style.display = 'block';
+				if (!window.noCameraPermission) {
+					scanningEle.style.display = 'block';
+					appScanningEle.style.display = 'block';
+				}
 				window.appOverlay.style.borderColor = 'rgb(62, 78, 184)';
 				scan(true);
 			}
