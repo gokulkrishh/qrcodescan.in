@@ -8,8 +8,7 @@
 		"start": "npm-run-all --parallel serve watch",
 		"serve": "rollup -c && serve public",
 		"precommit": "lint-staged",
-		"pretty": "prettier --write 'src'",
-		"deploy": "npm run build && gh-pages -d public -b gh-pages -r https://github.com/gokulkrishh/qrcodescan.in"
+		"pretty": "prettier --write 'src'"
 	},
 	"lint-staged": {
 		"*.{js,css,html}": [
