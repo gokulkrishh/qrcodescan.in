@@ -382,8 +382,8 @@ video {
   margin-top: 10px;
 }
 
-.app__dialog-content h1,
-.app__infodialog h1 {
+.app__dialog-content h2,
+.app__infodialog h2 {
   margin-top: 5px;
   margin-bottom: 15px;
   font-weight: 600;
