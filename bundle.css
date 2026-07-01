@@ -84,8 +84,19 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.scanner-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .app__layout {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -100,7 +111,7 @@ body {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -291,7 +302,7 @@ video {
 }
 
 .app__snackbar {
-  position: fixed;
+  position: absolute;
   bottom: 15px;
   left: 20px;
   pointer-events: none;
@@ -338,7 +349,7 @@ video {
   height: 180px;
   border-radius: 8px;
   display: flex;
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
@@ -430,7 +441,7 @@ video {
 }
 
 .app__overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
@@ -502,7 +513,7 @@ video {
   width: 58px;
   height: 58px;
   cursor: pointer;
-  position: fixed;
+  position: absolute;
   bottom: 20px;
   right: 20px;
   border-radius: 50%;
@@ -548,4 +559,74 @@ input[type='file'] {
   .app__infodialog-content {
     padding: 12px 13px;
   }
+}
+
+/* Crawlable content section below the scanner hero */
+.content {
+  background: #fff;
+  color: #202124;
+  padding: 48px 20px 64px;
+}
+
+.content__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.content h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.content h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 40px 0 12px;
+}
+
+.content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 8px;
+}
+
+.content p,
+.content li,
+.content dd {
+  margin-bottom: 12px;
+}
+
+.content ol {
+  padding-left: 20px;
+}
+
+.content a {
+  color: rgb(62, 78, 184);
+}
+
+.faq dt {
+  font-weight: 600;
+  margin-top: 16px;
+}
+
+.faq dd {
+  margin: 4px 0 0;
+}
+
+.content__footer {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #5f6368;
+}
+
+/* Reserved manual ad unit — only inside .content, never over the camera UI */
+.ad-slot {
+  display: block;
+  min-height: 280px;
+  max-width: 336px;
+  margin: 28px auto;
+  text-align: center;
 }
