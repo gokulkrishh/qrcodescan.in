@@ -1,3 +1,4 @@
 *.json
 /dist
 app/decoder.js
+src/css/styles.css

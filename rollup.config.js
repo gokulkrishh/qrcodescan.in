@@ -1,4 +1,4 @@
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import del from 'rollup-plugin-delete';
 import { generateSW } from 'rollup-plugin-workbox';
 import sizes from 'rollup-plugin-sizes';
