@@ -623,7 +623,7 @@ input[type='file'] {
 }
 
 /* Reserved manual ad unit — only inside .content, never over the camera UI */
-.ad-slot {
+.content-promo {
   display: block;
   min-height: 280px;
   max-width: 336px;
