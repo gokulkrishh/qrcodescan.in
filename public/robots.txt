@@ -1,8 +1,4 @@
-User-agent: Googlebot
-Disallow: /nogooglebot/
-
 User-agent: *
 Allow: /
 
-Sitemap: https://www.qrcodescan.in/sitemap.xml
-Sitemap: http://www.qrcodescan.in/sitemap.xml
+Sitemap: https://qrcodescan.in/sitemap.xml
