@@ -16,19 +16,28 @@ export default {
 		},
 	],
 	plugins: [
-		del({ targets: ['public/workbox-*.js', 'public/sw.js', 'public/bundle.js', 'public/bundle.css'] }),
+		del({
+			targets: [
+				'public/workbox-*.js',
+				'public/workbox-*.js.map',
+				'public/service-worker.js.map',
+				'public/bundle.js',
+				'public/bundle.css',
+			],
+		}),
 		css({ output: 'bundle.css' }),
 		terser(),
 		isProd &&
 			generateSW({
 				swDest: 'public/service-worker.js',
 				globDirectory: './public',
+				sourcemap: false,
 				clientsClaim: true,
 				skipWaiting: true,
 				runtimeCaching: [
 					{
 						urlPattern: isProd ? /https:\/\/qrcodescan.in\// : /http:\/\/localhost:5000\//,
-						handler: 'CacheFirst',
+						handler: 'StaleWhileRevalidate',
 						options: {
 							cacheName: 'pages',
 							cacheableResponse: { statuses: [200] },

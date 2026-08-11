@@ -93,6 +93,15 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* On phones the hero stops short of the fold so the content below it is
+   discoverable. svh keeps the height stable as the URL bar collapses. */
+@media screen and (max-width: 600px) {
+  .scanner-hero {
+    height: 85vh;
+    height: 85svh;
+  }
+}
+
 .app__layout {
   position: absolute;
   top: 0;
@@ -548,7 +557,6 @@ input[type='file'] {
 .app__scanner-img {
   z-index: 1;
   position: relative;
-  display: none;
 }
 
 @media screen and (max-width: 480px) {

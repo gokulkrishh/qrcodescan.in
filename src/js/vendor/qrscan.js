@@ -17,7 +17,7 @@ function setPhotoSourceToScan(forSelectedPhotos) {
 	if (!forSelectedPhotos && window.isMediaStreamAPISupported) {
 		QRReader.webcam = document.querySelector('video');
 	} else {
-		QRReader.webcam = document.querySelector('img');
+		QRReader.webcam = document.querySelector('#frame');
 	}
 }
 

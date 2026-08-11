@@ -50,16 +50,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	window.appOverlay = document.querySelector('.app__overlay');
 
-	//Initializing qr scanner
+	//Scanner frame is visible by default for the camera flow only
+	if (!window.isMediaStreamAPISupported) {
+		appScanningEle.style.display = 'none';
+	}
+
+	//To initialize QR Scanner
+	QRReader.init();
+
 	window.addEventListener('load', (event) => {
-		QRReader.init(); //To initialize QR Scanner
 		// Set camera overlay size
 		setTimeout(() => {
 			setCameraOverlay();
 			if (window.isMediaStreamAPISupported) {
 				scan();
 			}
-		}, 1000);
+		}, 100);
 
 		// To support other browsers who dont have mediaStreamAPI
 		selectFromPhoto();
