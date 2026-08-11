@@ -602,8 +602,7 @@ input[type='file'] {
 }
 
 .content p,
-.content li,
-.content dd {
+.content li {
   margin-bottom: 12px;
 }
 
@@ -615,12 +614,13 @@ input[type='file'] {
   color: rgb(62, 78, 184);
 }
 
-.faq dt {
-  font-weight: 600;
-  margin-top: 16px;
+/* Question headings keep body size so the FAQ reads as a list, not sections */
+.faq h3 {
+  font-size: 16px;
+  margin: 16px 0 0;
 }
 
-.faq dd {
+.faq p {
   margin: 4px 0 0;
 }
 
