@@ -36,7 +36,7 @@
 		"serve": "^14.2.6"
 	},
 	"dependencies": {
-		"baseline-browser-mapping": "^2.10.40",
+		"baseline-browser-mapping": "^2.11.22",
 		"caniuse-lite": "^1.0.30001800"
 	}
 }
