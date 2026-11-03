@@ -1,88 +1,244 @@
-html,
-body,
-p,
-ol,
-ul,
-li,
-dl,
-dt,
-dd,
-blockquote,
-figure,
-fieldset,
-legend,
-textarea,
-pre,
-iframe,
-hr,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0;
-	padding: 0;
+/* Shared by every page: reset, content typography, buttons, ads, header and
+   footer navigation. */
+
+html, body, p, ol, ul, li, dl, dt, dd, blockquote, figure, fieldset, legend,
+textarea, pre, iframe, hr, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-size: 100%;
-	font-weight: normal;
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
 }
 
-ul {
-	list-style: none;
-}
+ul { list-style: none; }
+button, input, select, textarea { margin: 0; font: inherit; }
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+img, embed, object, audio { height: auto; max-width: 100%; }
+iframe { border: 0; }
+[hidden] { display: none !important; }
 
-button,
-input,
-select,
-textarea {
-	margin: 0
-}
-
-html {
-	box-sizing: border-box
-}
-
-*,
-*:before,
-*:after {
-	box-sizing: inherit
-}
-
-img,
-embed,
-object,
-audio {
-	height: auto;
-	max-width: 100%
-}
-
-iframe {
-	border: 0
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0
-}
-
-td,
-th {
-	padding: 0;
-	text-align: left
+:root {
+  --brand: #3e4eb8;
+  --brand-dark: #2f3c94;
+  --text: #202124;
+  --muted: #5f6368;
+  --line: #dadce0;
+  --surface: #f6f7fb;
+  --warn-bg: #fff4e5;
+  --warn-text: #7a4100;
 }
 
 body {
-  font-family: Roboto, Helvetica,Arial,sans-serif;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  background: #fff;
+  color: var(--text);
 }
+
+/* Buttons ---------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: #fff;
+  color: var(--brand);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:active { opacity: 0.85; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.btn--primary {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+
+.btn--primary:hover { background: var(--brand-dark); }
+
+/* Site header (all pages except the scanner, which has its own hero) ----- */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px 16px;
+}
+
+.site-header__logo {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 17px;
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  gap: 2px;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.site-nav a {
+  padding: 8px 8px;
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--brand);
+  background: var(--surface);
+}
+
+/* Crawlable content section --------------------------------------------- */
+
+.content {
+  background: #fff;
+  color: var(--text);
+  padding: 48px 20px 64px;
+}
+
+.content__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.content h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.content h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 40px 0 12px;
+}
+
+.content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 8px;
+}
+
+.content p,
+.content li {
+  margin-bottom: 12px;
+}
+
+.content ol,
+.content ul.bullets {
+  padding-left: 20px;
+}
+
+.content ul.bullets { list-style: disc; }
+
+.content a { color: var(--brand); }
+
+/* Question headings keep body size so the FAQ reads as a list, not sections */
+.faq h3 {
+  font-size: 16px;
+  margin: 16px 0 0;
+}
+
+.faq p { margin: 4px 0 0; }
+
+/* Cross-links to the other tools */
+.tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 16px 0 0;
+}
+
+.tools a {
+  display: block;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.tools a:hover { border-color: var(--brand); }
+
+.tools strong {
+  display: block;
+  color: var(--brand);
+  margin-bottom: 2px;
+}
+
+.tools span {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.site-footer {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-bottom: 12px;
+}
+
+.site-footer a { color: var(--muted); }
+
+/* Ads --------------------------------------------------------------------
+   Manual units only ever sit in page content, never over the camera UI,
+   and always below a non-interactive block with spacing from buttons.
+   "Advertisements" is one of the two labels AdSense allows. */
+
+.ad {
+  margin: 40px auto;
+  max-width: 336px;
+  text-align: center;
+}
+
+.ad__label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Reserved height avoids layout shift while the ad loads. */
+.ad__unit {
+  display: block;
+  min-height: 280px;
+}
+
+/* Scanner page only. Shared reset, content and ad styles are in site.css. */
 
 .scanner-hero {
   position: relative;
@@ -311,7 +467,7 @@ video {
 }
 
 .app__snackbar {
-  position: absolute;
+  position: fixed;
   bottom: 15px;
   left: 20px;
   pointer-events: none;
@@ -350,8 +506,7 @@ video {
   opacity: 0;
 }
 
-.app__infodialog,
-.app__dialog {
+.app__infodialog {
   z-index: 12;
   background-color: #fff;
   width: 290px;
@@ -373,7 +528,6 @@ video {
   height: 240px;
 }
 
-.app__dialog-content,
 .app__infodialog-content {
   width: 100%;
   padding: 15px;
@@ -391,7 +545,6 @@ video {
   margin-top: 10px;
 }
 
-.app__dialog-content h2,
 .app__infodialog h2 {
   margin-top: 5px;
   margin-bottom: 15px;
@@ -399,18 +552,6 @@ video {
   font-size: 19px;
 }
 
-.app__dialog input {
-  width: 250px;
-  height: 30px;
-  border: none;
-  border-bottom: 1px solid rgba(0,0,0,.24);
-  outline: none;
-  font-size: 15px;
-  color: #1b1eb5;
-  font-weight: 500;
-}
-
-.app__dialog-actions,
 .app__infodialog-actions {
   display: block;
   position: absolute;
@@ -419,9 +560,7 @@ video {
 }
 
 .app__infodialog-open,
-.app__infodialog-close,
-.app__dialog-open,
-.app__dialog-close {
+.app__infodialog-close {
   border: 0;
   height: 35px;
   width: 70px;
@@ -433,19 +572,12 @@ video {
   margin-right: -15px;
 }
 
-.app__dialog-open {
-  display: none;
-}
-
 .app__infodialog-open:active,
-.app__infodialog-close:active,
-.app__dialog-open:active,
-.app__dialog-close:active {
+.app__infodialog-close:active {
   opacity: 0.9;
 }
 
-.app__infodialog--hide,
-.app__dialog--hide {
+.app__infodialog--hide {
   display: none;
 }
 
@@ -500,7 +632,6 @@ video {
   left: 0;
 }
 
-.app__dialog-overlay,
 .app__infodialog-overlay {
   position: fixed;
   left: 0;
@@ -569,72 +700,144 @@ input[type='file'] {
   }
 }
 
-/* Crawlable content section below the scanner hero */
-.content {
-  background: #fff;
-  color: #202124;
-  padding: 48px 20px 64px;
-}
-
-.content__inner {
-  max-width: 720px;
-  margin: 0 auto;
-  line-height: 1.6;
-  font-size: 16px;
-}
-
-.content h1 {
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.content h2 {
-  font-size: 22px;
-  font-weight: 600;
-  margin: 40px 0 12px;
-}
-
-.content h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 24px 0 8px;
-}
-
-.content p,
-.content li {
-  margin-bottom: 12px;
-}
-
-.content ol {
-  padding-left: 20px;
-}
-
-.content a {
-  color: rgb(62, 78, 184);
-}
-
-/* Question headings keep body size so the FAQ reads as a list, not sections */
-.faq h3 {
-  font-size: 16px;
-  margin: 16px 0 0;
-}
-
-.faq p {
-  margin: 4px 0 0;
-}
-
-.content__footer {
-  margin-top: 40px;
+/* Link to the generator, top-left of the camera view */
+.app__header-link {
+  position: absolute;
+  top: 22px;
+  left: 16px;
+  padding: 8px 14px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
   font-size: 14px;
-  color: #5f6368;
+  font-weight: 600;
+  text-decoration: none;
 }
 
-/* Reserved manual ad unit — only inside .content, never over the camera UI */
-.content-promo {
-  display: block;
-  min-height: 280px;
-  max-width: 336px;
-  margin: 28px auto;
-  text-align: center;
+.app__header-link:active {
+  opacity: 0.8;
 }
+
+/* Scan result. Shown in normal page flow in place of the scanner hero (not
+   as a pop-up), so the page content and its ad follow it naturally. */
+.result {
+  background: var(--surface);
+  padding: 16px 16px 8px;
+}
+
+.result__inner {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.result__back {
+  border: 0;
+  background: transparent;
+  color: var(--brand);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.result__card {
+  margin-top: 8px;
+  padding: 20px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.result__type {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.result__host {
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.result__value {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.4;
+  resize: vertical;
+  word-break: break-all;
+}
+
+.result__details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+  margin-top: 16px;
+  font-size: 15px;
+}
+
+.result__details dt {
+  color: var(--muted);
+}
+
+.result__details dd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.result__copy-inline {
+  border: 0;
+  background: transparent;
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.result__warning {
+  margin-top: 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--warn-bg);
+  color: var(--warn-text);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.result__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.result__privacy {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.result__promo {
+  margin: 0 auto 24px;
+  max-width: 560px;
+}
+
+.result__promo h2 {
+  font-size: 17px;
+  font-weight: 600;
+}
+
