@@ -1,22 +1,25 @@
+// Hostname: dot-separated labels of 1-63 chars, alphabetic TLD. Every
+// quantifier is bounded, so matching stays linear. (The previous regex nested
+// `([a-z\d-]*[a-z\d])*` inside `(...)+`, which backtracked exponentially and
+// froze the tab on long dot-less input such as a 40-character token.)
+const HOST_RE = /^(?:[a-z\d](?:[a-z\d-]{0,61}[a-z\d])?\.)+[a-z]{2,63}$/i;
+const IPV4_RE = /^(?:\d{1,3}\.){3}\d{1,3}$/;
+
+// True for http(s) links and bare domains like "example.com/menu".
 export const isURL = (url = '') => {
-	if (!url || typeof url !== 'string') {
+	if (!url || typeof url !== 'string' || /\s/.test(url)) return false;
+
+	let parsed;
+	try {
+		parsed = new URL(/^https?:\/\//i.test(url) ? url : `https://${url}`);
+	} catch (e) {
 		return false;
 	}
 
-	const protocol = '^(https?:\\/\\/)?';
-	const domain = '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|';
-	const ip = '((\\d{1,3}\\.){3}\\d{1,3}))';
-	const port = '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*';
-	const queryString = '(\\?[;&a-z\\d%_.~+=-]*)?';
-	const fragmentLocater = '(\\#[-a-z\\d_]*)?$';
+	// "user@example.com" is an email address, not a link.
+	if (parsed.username || parsed.password) return false;
 
-	const regex = new RegExp(`${protocol + domain + ip + port + queryString + fragmentLocater}`, 'i');
-
-	return regex.test(url);
-};
-
-export const hasProtocolInUrl = (url = '') => {
-	const protocol = '^(https?:\\/\\/)';
-	const regex = new RegExp(protocol, 'i');
-	return regex.test(url);
+	const host = parsed.hostname;
+	if (host.length > 253) return false;
+	return IPV4_RE.test(host) || HOST_RE.test(host);
 };

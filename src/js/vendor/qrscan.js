@@ -10,7 +10,8 @@ QRReader.decoder = null;
 
 QRReader.setCanvas = () => {
 	QRReader.canvas = document.createElement('canvas');
-	QRReader.ctx = QRReader.canvas.getContext('2d');
+	// Read back every frame with getImageData: keep the canvas on the CPU.
+	QRReader.ctx = QRReader.canvas.getContext('2d', { willReadFrequently: true });
 };
 
 function setPhotoSourceToScan(forSelectedPhotos) {
@@ -151,9 +152,10 @@ QRReader.scan = function (callback, forSelectedPhotos) {
 
 	QRReader.decoder.onmessage = onDecoderMessage;
 
-	setTimeout(() => {
-		setPhotoSourceToScan(forSelectedPhotos);
-	});
+	// Switch source before the first frame. Doing this in a setTimeout let the
+	// first frame be read from the previous source, so after scanning an
+	// uploaded image, "scan again" instantly re-detected the same image.
+	setPhotoSourceToScan(forSelectedPhotos);
 
 	// Start QR-decoder
 	function newDecoderFrame() {

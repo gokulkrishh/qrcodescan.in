@@ -1,0 +1,176 @@
+/* QR generator pages */
+
+.gen {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 8px 16px 0;
+}
+
+.gen h1 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.gen__lede {
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.gen__tabs {
+  display: flex;
+  gap: 6px;
+  margin: 20px 0 16px;
+  overflow-x: auto;
+}
+
+.gen__tabs a {
+  flex: none;
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.gen__tabs a[aria-current="page"] {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+
+.gen__tool {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+@media (min-width: 720px) {
+  .gen__tool {
+    grid-template-columns: 1fr 300px;
+    align-items: start;
+  }
+}
+
+.gen__field {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.gen__field > span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.gen__field small {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.gen__field input[type="text"],
+.gen__field input[type="url"],
+.gen__field input[type="password"],
+.gen__field input[type="number"],
+.gen__field input:not([type]),
+.gen__field textarea,
+.gen__field select {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  font-size: 16px; /* 16px stops iOS zooming on focus */
+}
+
+.gen__field textarea {
+  resize: vertical;
+}
+
+.gen__field input:focus,
+.gen__field textarea:focus,
+.gen__field select:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+
+.gen__check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.gen__preview {
+  text-align: center;
+}
+
+.gen__canvas,
+.gen__empty {
+  display: block;
+  width: 260px;
+  height: 260px;
+  margin: 0 auto;
+  border-radius: 8px;
+  background: #fff;
+  image-rendering: pixelated;
+}
+
+.gen__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border: 2px dashed var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.gen__status,
+.gen__encoded {
+  min-height: 1.4em;
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--muted);
+  word-break: break-all;
+}
+
+.gen__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.gen__size {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.gen__size select {
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.gen + .content {
+  padding-top: 0;
+}
