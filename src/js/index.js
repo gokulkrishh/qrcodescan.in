@@ -1,26 +1,26 @@
 import QRReader from './vendor/qrscan.js';
 import snackbar from './snackbar.js';
-import { isURL, hasProtocolInUrl } from './utils';
+import { parseQR } from './parse.js';
+import { track } from './analytics.js';
+import { loadAd, loadStaticAds } from './ads.js';
+import { registerServiceWorker } from './sw.js';
 
+import '../css/site.css';
 import '../css/styles.css';
 
-//If service worker is installed, show offline usage notification
-if ('serviceWorker' in navigator) {
-	window.addEventListener('load', () => {
-		navigator.serviceWorker
-			.register('/service-worker.js')
-			.then((reg) => {
-				// console.log('SW registered: ', reg);
-				if (!localStorage.getItem('offline')) {
-					localStorage.setItem('offline', true);
-					snackbar.show('App is ready for offline usage.', 5000);
-				}
-			})
-			.catch((regError) => {
-				console.log('SW registration failed: ', regError);
-			});
-	});
-}
+registerServiceWorker(() => snackbar.show('App is ready for offline usage.', 5000));
+
+const TYPE_LABELS = {
+	url: 'Link',
+	upi: 'UPI payment',
+	wifi: 'Wi-Fi network',
+	vcard: 'Contact',
+	tel: 'Phone number',
+	email: 'Email address',
+	sms: 'Text message',
+	geo: 'Location',
+	text: 'Text',
+};
 
 window.addEventListener('DOMContentLoaded', () => {
 	//To check the device and add iOS support
@@ -28,20 +28,32 @@ window.addEventListener('DOMContentLoaded', () => {
 	window.isMediaStreamAPISupported = navigator && navigator.mediaDevices && 'enumerateDevices' in navigator.mediaDevices;
 	window.noCameraPermission = false;
 
-	var copiedText = null;
+	loadStaticAds();
+
 	var frame = null;
+	var current = null;
+	var resultInHistory = false;
+	// After "Scan another", the code just scanned is usually still in front of
+	// the camera. Ignore it briefly so the user isn't bounced straight back.
+	var REPEAT_COOLDOWN_MS = 3000;
+	var lastText = null;
+	var lastClosedAt = 0;
+
+	var heroEle = document.querySelector('.scanner-hero');
 	var selectPhotoBtn = document.querySelector('.app__select-photos');
-	var dialogElement = document.querySelector('.app__dialog');
-	var dialogOverlayElement = document.querySelector('.app__dialog-overlay');
-	var dialogOpenBtnElement = document.querySelector('.app__dialog-open');
-	var dialogCloseBtnElement = document.querySelector('.app__dialog-close');
 	var scanningEle = document.querySelector('.custom-scanner');
 	var appScanningEle = document.querySelector('.app__scanner-img');
-	var textBoxEle = document.querySelector('#result');
-
-	var helpTextEle = document.querySelector('.app__help-text');
-	var infoSvg = document.querySelector('.app__header-icon svg');
 	var videoElement = document.querySelector('video');
+
+	var resultEle = document.querySelector('.result');
+	var resultType = resultEle.querySelector('.result__type');
+	var resultHost = resultEle.querySelector('.result__host');
+	var resultValue = resultEle.querySelector('.result__value');
+	var resultDetails = resultEle.querySelector('.result__details');
+	var resultWarning = resultEle.querySelector('.result__warning');
+	var resultPrimary = resultEle.querySelector('.result__primary');
+	var resultShare = resultEle.querySelector('[data-action="share"]');
+	var resultAd = resultEle.querySelector('[data-ad-slot]');
 
 	var headerIcon = document.querySelector('.app__header-icon');
 	var infoDialogElement = document.querySelector('.app__infodialog');
@@ -58,10 +70,10 @@ window.addEventListener('DOMContentLoaded', () => {
 	//To initialize QR Scanner
 	QRReader.init();
 
-	window.addEventListener('load', (event) => {
+	window.addEventListener('load', () => {
 		// Set camera overlay size
 		setTimeout(() => {
-			setCameraOverlay();
+			window.appOverlay.style.borderStyle = 'solid';
 			if (window.isMediaStreamAPISupported) {
 				scan();
 			}
@@ -71,81 +83,237 @@ window.addEventListener('DOMContentLoaded', () => {
 		selectFromPhoto();
 	});
 
-	function setCameraOverlay() {
-		window.appOverlay.style.borderStyle = 'solid';
-	}
-
 	function createFrame() {
 		frame = document.createElement('img');
 		frame.src = '';
 		frame.id = 'frame';
 	}
 
-	//Dialog close btn event
-	dialogCloseBtnElement.addEventListener('click', hideDialog, false);
 	infoDialogCloseBtnElement.addEventListener('click', closeInfoDialog, false);
-	dialogOpenBtnElement.addEventListener('click', openInBrowser, false);
 	headerIcon.addEventListener('click', showInfo, false);
-
-	//To open result in browser
-	function openInBrowser() {
-		// console.log('Result: ', copiedText);
-
-		if (!hasProtocolInUrl(copiedText)) {
-			copiedText = `//${copiedText}`;
-		}
-
-		window.open(copiedText, '_blank', 'toolbar=0,location=0,menubar=0');
-		copiedText = null;
-		hideDialog();
-	}
 
 	//Scan
 	function scan(forSelectedPhotos = false) {
-		if (window.isMediaStreamAPISupported && !window.noCameraPermission) {
-			scanningEle.style.display = 'block';
-			appScanningEle.style.display = 'block';
-		}
-
-		if (forSelectedPhotos) {
+		if ((window.isMediaStreamAPISupported && !window.noCameraPermission) || forSelectedPhotos) {
 			scanningEle.style.display = 'block';
 			appScanningEle.style.display = 'block';
 		}
 
 		QRReader.scan((result) => {
-			copiedText = result;
-			textBoxEle.value = result;
-			textBoxEle.select();
+			if (!forSelectedPhotos && String(result).trim() === lastText && Date.now() - lastClosedAt < REPEAT_COOLDOWN_MS) {
+				// Restart after the decoder's own follow-up frame has run (and
+				// stopped, since active is false); restarting synchronously
+				// would leave two frame loops running.
+				setTimeout(scan, 200);
+				return;
+			}
 			scanningEle.style.display = 'none';
 			appScanningEle.style.display = 'none';
-			if (isURL(result)) {
-				dialogOpenBtnElement.style.display = 'inline-block';
-			}
-			dialogElement.classList.remove('app__dialog--hide');
-			dialogOverlayElement.classList.remove('app__dialog--hide');
+			showResult(result, forSelectedPhotos ? 'image' : 'camera');
 		}, forSelectedPhotos);
 	}
 
-	//Hide dialog
-	function hideDialog() {
-		copiedText = null;
-		textBoxEle.value = '';
+	function addDetail(label, value, copyable) {
+		if (!value) return;
+		var dt = document.createElement('dt');
+		dt.textContent = label;
+		var dd = document.createElement('dd');
+		var span = document.createElement('span');
+		span.textContent = value;
+		dd.appendChild(span);
+		if (copyable) {
+			var btn = document.createElement('button');
+			btn.type = 'button';
+			btn.className = 'result__copy-inline';
+			btn.textContent = 'Copy';
+			btn.addEventListener('click', () => copy(value, label.toLowerCase()));
+			dd.appendChild(btn);
+		}
+		resultDetails.append(dt, dd);
+	}
 
-		if (!window.isMediaStreamAPISupported) {
-			frame.src = '';
-			frame.className = '';
+	function setPrimary(label, href, external) {
+		resultPrimary.textContent = label;
+		resultPrimary.href = href;
+		if (external) {
+			resultPrimary.target = '_blank';
+			resultPrimary.rel = 'noopener noreferrer';
+		} else {
+			resultPrimary.removeAttribute('target');
+			resultPrimary.removeAttribute('rel');
+		}
+		resultPrimary.hidden = false;
+	}
+
+	function warn(text) {
+		resultWarning.textContent = text;
+		resultWarning.hidden = false;
+	}
+
+	function vcardHref(text) {
+		return URL.createObjectURL(new Blob([text], { type: 'text/vcard' }));
+	}
+
+	// The result is a page state, not a pop-up: the scanner hero is swapped
+	// out for the result section in normal page flow, and Back returns to the
+	// scanner.
+	function showResult(raw, source) {
+		current = parseQR(raw);
+
+		resultType.textContent = TYPE_LABELS[current.type];
+		resultValue.value = current.text;
+		resultHost.hidden = true;
+		resultDetails.textContent = '';
+		resultDetails.hidden = true;
+		resultWarning.hidden = true;
+		resultPrimary.hidden = true;
+		resultPrimary.removeAttribute('download');
+		if (resultPrimary.href.startsWith('blob:')) URL.revokeObjectURL(resultPrimary.href);
+		resultShare.hidden = !navigator.share;
+
+		switch (current.type) {
+			case 'url':
+				resultHost.textContent = current.host;
+				resultHost.hidden = false;
+				setPrimary('Open link', current.href, true);
+				if (current.suspicious) {
+					warn('This address uses look-alike characters and may imitate another website. Check it carefully before opening.');
+				} else if (current.insecure) {
+					warn('This link is not secure (HTTP). Avoid entering passwords or payment details on it.');
+				}
+				break;
+			case 'upi':
+				addDetail('Pay to', current.upi.pn);
+				addDetail('UPI ID', current.upi.pa, true);
+				addDetail('Amount', current.upi.am ? `₹${current.upi.am}` : 'You enter it in your UPI app');
+				addDetail('Note', current.upi.tn);
+				setPrimary('Pay with UPI app', current.text, false);
+				warn('Scanning a QR code is only for paying. You never need to scan a QR code or enter your UPI PIN to receive money.');
+				break;
+			case 'wifi':
+				addDetail('Network', current.wifi.ssid, true);
+				addDetail('Password', current.wifi.password, true);
+				addDetail('Security', current.wifi.security === 'nopass' ? 'None (open network)' : current.wifi.security);
+				break;
+			case 'vcard':
+				addDetail('Name', current.vcard.name);
+				addDetail('Phone', current.vcard.phone, true);
+				addDetail('Email', current.vcard.email, true);
+				addDetail('Company', current.vcard.org);
+				setPrimary('Save contact', vcardHref(current.text), false);
+				resultPrimary.download = `${current.vcard.name || 'contact'}.vcf`;
+				break;
+			case 'tel':
+				setPrimary('Call', current.href, false);
+				break;
+			case 'email':
+				setPrimary('Send email', current.href, false);
+				break;
+			case 'sms':
+				setPrimary('Send text message', current.href, false);
+				break;
+			case 'geo':
+				setPrimary('Open in maps', current.href, true);
+				break;
+		}
+		resultDetails.hidden = !resultDetails.childElementCount;
+		// Structured payloads are shown as details; the raw string is noise.
+		resultValue.hidden = !resultDetails.hidden;
+
+		heroEle.hidden = true;
+		resultEle.hidden = false;
+		window.scrollTo(0, 0);
+
+		if (!resultInHistory) {
+			history.pushState({ qrResult: true }, '');
+			resultInHistory = true;
 		}
 
-		dialogElement.classList.add('app__dialog--hide');
-		dialogOverlayElement.classList.add('app__dialog--hide');
+		// Requested only once the container is visible and has a width.
+		requestAnimationFrame(() => loadAd(resultAd, resultAd.dataset.adSlot));
+
+		track('qr_scan', { qr_type: current.type, source });
+	}
+
+	function backToScanner() {
+		lastText = current ? current.text : null;
+		lastClosedAt = Date.now();
+		current = null;
+		resultValue.value = '';
+		resultEle.hidden = true;
+		heroEle.hidden = false;
+		window.scrollTo(0, 0);
+
+		// Remove an uploaded image so the live camera is visible again.
+		if (frame) {
+			frame.removeAttribute('src');
+			frame.className = '';
+		}
+		if (videoElement.srcObject && videoElement.paused) videoElement.play().catch(() => {});
 		scan();
 	}
+
+	// "Scan another" pops the history entry pushed in showResult, so the
+	// browser Back button and the in-page button behave the same.
+	function closeResult() {
+		if (resultInHistory) history.back();
+		else backToScanner();
+	}
+
+	window.addEventListener('popstate', () => {
+		if (resultInHistory) {
+			resultInHistory = false;
+			backToScanner();
+		}
+	});
+
+	function copy(text, what) {
+		var done = () => snackbar.show('Copied to clipboard', 2000);
+		if (navigator.clipboard && window.isSecureContext) {
+			navigator.clipboard.writeText(text).then(done, () => fallbackCopy(text, done));
+		} else {
+			fallbackCopy(text, done);
+		}
+		track('qr_result_action', { action: 'copy', qr_type: current ? current.type : '', field: what || 'value' });
+	}
+
+	function fallbackCopy(text, done) {
+		var ta = document.createElement('textarea');
+		ta.value = text;
+		ta.setAttribute('readonly', '');
+		ta.style.position = 'fixed';
+		ta.style.opacity = '0';
+		document.body.appendChild(ta);
+		ta.select();
+		try {
+			if (document.execCommand('copy')) done();
+		} catch (e) {
+			snackbar.show('Press and hold the text to copy it', 3000);
+		}
+		ta.remove();
+	}
+
+	resultEle.addEventListener('click', (e) => {
+		var target = e.target.closest('[data-action]');
+		if (!target || !current) return;
+		var action = target.dataset.action;
+		if (action === 'rescan') closeResult();
+		if (action === 'copy') copy(current.text);
+		if (action === 'share') {
+			navigator.share({ text: current.text }).catch(() => {});
+			track('qr_result_action', { action: 'share', qr_type: current.type });
+		}
+	});
+
+	resultPrimary.addEventListener('click', () => {
+		track('qr_result_action', { action: 'open', qr_type: current ? current.type : '' });
+	});
 
 	function selectFromPhoto() {
 		//Creating the camera element
 		var camera = document.createElement('input');
 		camera.setAttribute('type', 'file');
-		camera.setAttribute('capture', 'camera');
+		camera.setAttribute('accept', 'image/*');
 		camera.id = 'camera';
 		window.appOverlay.style.borderStyle = '';
 		selectPhotoBtn.style.display = 'flex';
@@ -174,6 +342,8 @@ window.addEventListener('DOMContentLoaded', () => {
 				}
 				window.appOverlay.style.borderColor = 'rgb(62, 78, 184)';
 				scan(true);
+				// Allow picking the same file again.
+				camera.value = '';
 			}
 		});
 	}

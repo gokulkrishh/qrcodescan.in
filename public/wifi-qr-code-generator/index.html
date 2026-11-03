@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Wi-Fi QR Code Generator — Share Your Wi-Fi Password with a QR Code</title>
+    <meta name="description" content="Create a free Wi-Fi QR code. Guests scan it with their phone camera and join your network without typing the password. Works on iPhone and Android.">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="canonical" href="https://qrcodescan.in/wifi-qr-code-generator/">
+    <meta property="og:title" content="Wi-Fi QR Code Generator — Share Your Wi-Fi Password with a QR Code">
+    <meta property="og:description" content="Create a free Wi-Fi QR code. Guests scan it with their phone camera and join your network without typing the password. Works on iPhone and Android.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://qrcodescan.in/wifi-qr-code-generator/">
+    <meta property="og:image" content="https://qrcodescan.in/images/touch/android-chrome-512x512.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#e4e4e4">
+    <link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.jpg">
+    <link rel="icon" type="image/png" href="/images/touch/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/images/touch/favicon-16x16.png" sizes="16x16">
+    <link rel="shortcut icon" href="/images/touch/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="/generator.css">
+    <script src="/generator.js" defer></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8317178183177647" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "Wi-Fi QR Code Generator",
+          "url": "https://qrcodescan.in/wifi-qr-code-generator/",
+          "description": "Create a free Wi-Fi QR code. Guests scan it with their phone camera and join your network without typing the password. Works on iPhone and Android.",
+          "applicationCategory": "UtilitiesApplication",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "QR Code Scanner",
+              "item": "https://qrcodescan.in/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Wi-Fi QR Code Generator",
+              "item": "https://qrcodescan.in/wifi-qr-code-generator/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How do I scan a Wi-Fi QR code?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Open the camera on an iPhone (iOS 11 or later) or Android phone (Android 10 or later), point it at the code and tap the notification to join. Older phones can use the QR code scanner on this site to see and copy the password."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is it safe to put my Wi-Fi password in a QR code?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Anyone who scans the code can join your network, just like anyone you tell the password to. For visitors, it’s best to use a separate guest network on your router."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What if I change my Wi-Fi password?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The old QR code stops working. Create and print a new one with the new password."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which security type should I choose?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most home and office routers use WPA2 or WPA3. Pick that unless your router settings say WEP, or None for open networks without a password."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is my Wi-Fi password sent anywhere?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. The QR code is created in your browser on your device. Your network name and password never leave your phone or computer."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-header__logo" href="/">QR Code Scanner</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="/">Scan QR code</a>
+        <a href="/qr-code-generator/">Create QR code</a>
+        <a href="/upi-qr-code-generator/">UPI QR</a>
+        <a href="/wifi-qr-code-generator/" aria-current="page">Wi-Fi QR</a>
+      </nav>
+    </header>
+    <main class="gen">
+      <h1>Wi-Fi QR Code Generator</h1>
+      <p class="gen__lede">Guests scan it with their phone camera and join your Wi-Fi without typing the password. Works on iPhone and Android.</p>
+      <nav class="gen__tabs" aria-label="QR code type">
+        <a href="/qr-code-generator/">Link or text</a>
+        <a href="/upi-qr-code-generator/">UPI payment</a>
+        <a href="/wifi-qr-code-generator/" aria-current="page">Wi-Fi</a>
+      </nav>
+      <div class="gen__tool">
+        <form class="gen__form" data-qr-type="wifi" data-filename="wifi-qr-code" autocomplete="off">
+          <label class="gen__field">
+            <span>Network name (SSID)</span>
+            <input name="ssid" type="text" placeholder="MyHomeWiFi" spellcheck="false" autocapitalize="off">
+          </label>
+          <label class="gen__field">
+            <span>Security</span>
+            <select name="security">
+              <option value="WPA" selected>WPA / WPA2 / WPA3 (most common)</option>
+              <option value="WEP">WEP (old routers)</option>
+              <option value="nopass">None (open network)</option>
+            </select>
+          </label>
+          <label class="gen__field gen__field--password">
+            <span>Password</span>
+            <input name="password" type="text" placeholder="Wi-Fi password" spellcheck="false" autocapitalize="off" autocomplete="off">
+          </label>
+          <label class="gen__check">
+            <input name="hidden" type="checkbox"> Hidden network
+          </label>
+        </form>
+        <div class="gen__preview">
+          <canvas class="gen__canvas" width="260" height="260" role="img" aria-label="Your QR code" hidden></canvas>
+          <div class="gen__empty">Enter your network name and password to see your Wi-Fi QR code</div>
+          <p class="gen__status" role="status"></p>
+          <p class="gen__encoded"></p>
+          <div class="gen__actions">
+            <button type="button" class="btn btn--primary" data-download="png" disabled>Download PNG</button>
+            <button type="button" class="btn" data-download="svg" disabled>Download SVG</button>
+          </div>
+          <label class="gen__size">PNG size
+            <select name="png-size">
+              <option value="512">512 px</option>
+              <option value="1024" selected>1024 px</option>
+              <option value="2048">2048 px (print)</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </main>
+
+    <section class="content" aria-label="How to use this generator">
+      <div class="content__inner">
+        <h2>How to create a Wi-Fi QR code</h2>
+        <ol>
+          <li>Enter your Wi-Fi network name exactly as it appears on your phone, including capital letters.</li>
+          <li>Choose the security type and type the password.</li>
+          <li>Test it by scanning with your phone camera, then download and print it.</li>
+        </ol>
+        <div class="ad">
+          <span class="ad__label">Advertisements</span>
+          <div class="ad__unit" data-ad-slot="6132131796"></div>
+        </div>
+        <h2>Where to use it</h2>
+        <ul class="bullets">
+          <li><strong>Home</strong>: stick it on the fridge or router so guests can join without asking.</li>
+          <li><strong>Cafés, restaurants and salons</strong>: print it on table tents or at the counter.</li>
+          <li><strong>Homestays and rentals</strong>: put it in the welcome card so guests are online in seconds.</li>
+          <li><strong>Offices and events</strong>: share the guest network without reading out a long password.</li>
+        </ul>
+        <p>Tip: the network name and password are case-sensitive. If the QR code doesn’t connect, check both for a capital letter or extra space.</p>
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+          <div class="faq__item">
+            <h3>How do I scan a Wi-Fi QR code?</h3>
+            <p>Open the camera on an iPhone (iOS 11 or later) or Android phone (Android 10 or later), point it at the code and tap the notification to join. Older phones can use the <a href="/">QR code scanner</a> on this site to see and copy the password.</p>
+          </div>
+          <div class="faq__item">
+            <h3>Is it safe to put my Wi-Fi password in a QR code?</h3>
+            <p>Anyone who scans the code can join your network, just like anyone you tell the password to. For visitors, it’s best to use a separate guest network on your router.</p>
+          </div>
+          <div class="faq__item">
+            <h3>What if I change my Wi-Fi password?</h3>
+            <p>The old QR code stops working. Create and print a new one with the new password.</p>
+          </div>
+          <div class="faq__item">
+            <h3>Which security type should I choose?</h3>
+            <p>Most home and office routers use WPA2 or WPA3. Pick that unless your router settings say WEP, or None for open networks without a password.</p>
+          </div>
+          <div class="faq__item">
+            <h3>Is my Wi-Fi password sent anywhere?</h3>
+            <p>No. The QR code is created in your browser on your device. Your network name and password never leave your phone or computer.</p>
+          </div>
+        </div>
+        <h2>More free tools</h2>
+        <div class="tools">
+          <a href="/"><strong>QR code scanner</strong><span>Scan with your camera or an image</span></a>
+          <a href="/qr-code-generator/"><strong>QR code generator</strong><span>Website links, text, menus, PDFs</span></a>
+          <a href="/upi-qr-code-generator/"><strong>UPI QR code generator</strong><span>Accept payments from any UPI app</span></a>
+        </div>
+        <footer class="site-footer">
+          <nav aria-label="Site">
+            <a href="/">QR code scanner</a>
+            <a href="/qr-code-generator/">QR code generator</a>
+            <a href="/upi-qr-code-generator/">UPI QR code</a>
+            <a href="/wifi-qr-code-generator/">Wi-Fi QR code</a>
+            <a href="/privacy/">Privacy policy</a>
+          </nav>
+          <p>Open source on <a href="https://github.com/gokulkrishh/qrcodescan.in" rel="noopener">GitHub</a>. Built by <a href="https://gokul.site" rel="noopener">Gokulakrishnan Kalaikovan</a>.</p>
+        </footer>
+      </div>
+    </section>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JV7CRR9FCT"></script>
+    <script>
+      if (location.hostname !== "localhost") {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-JV7CRR9FCT');
+      }
+    </script>
+  </body>
+</html>

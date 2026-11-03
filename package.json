@@ -1,12 +1,13 @@
 {
 	"name": "qr-code-scanner",
 	"description": "QR Code Scanner is the fastest and most user-friendly progressive web application.",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"scripts": {
 		"build": "NODE_ENV=production rollup -c",
 		"watch": "rollup -c -w",
 		"start": "npm-run-all --parallel serve watch",
 		"serve": "rollup -c && serve public",
+		"test": "node --test",
 		"precommit": "lint-staged",
 		"pretty": "prettier --write 'src'"
 	},
@@ -21,6 +22,7 @@
 	},
 	"type": "module",
 	"devDependencies": {
+		"@rollup/plugin-node-resolve": "^16.0.3",
 		"@rollup/plugin-terser": "^1.0.0",
 		"cross-env": "^10.1.0",
 		"gh-pages": "^6.3.0",
@@ -37,6 +39,7 @@
 	},
 	"dependencies": {
 		"baseline-browser-mapping": "^2.10.40",
-		"caniuse-lite": "^1.0.30001800"
+		"caniuse-lite": "^1.0.30001800",
+		"qrcode-generator": "^2.0.4"
 	}
 }
